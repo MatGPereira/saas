@@ -22,7 +22,7 @@ describe(`#${User.name}`, _ => {
 			number: `${faker.number.bigInt({ min: 8, max: 9 })}`
 		});
 		const address: Address = Address.create({
-			cep: `${faker.location.zipCode()}`,
+			cep: '01001000',
 			city: faker.location.city(),
 			neighborhood: faker.string.alpha(),
 			number: faker.location.buildingNumber(),

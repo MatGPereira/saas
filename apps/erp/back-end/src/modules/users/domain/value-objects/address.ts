@@ -17,8 +17,8 @@ class Address implements IValueObject {
 
   public constructor(private readonly _value: TAddressCreate) { }
 
-  public get value(): string {
-    return this.value;
+  public get value(): TAddressCreate {
+    return this._value;
   }
 
   public static create(address: TAddressCreate): Address {
@@ -30,6 +30,19 @@ class Address implements IValueObject {
     }
 
     return new Address(address);
+  }
+
+  public toString(): string {
+    const {
+      cep,
+      city,
+      neighborhood,
+      number,
+      state,
+      street,
+      coordinates
+    } = this._value;
+    return `cep: ${cep} - city: ${city} - neighborhood: ${neighborhood} - number: ${number} - state: ${state} - street: ${street} - lat: ${coordinates?.latitude} - lng: ${coordinates?.longitude}`;
   }
 }
 
