@@ -18,7 +18,7 @@ class Telephone implements IValueObject {
     telephoneValidator.validate({ ddd, number });
 
     if (telephoneValidator.isInvalid()) {
-      throw new Error('Invalid password value object props');
+      throw new Error('Invalid telephone value object props');
     }
 
     return new Telephone({ ddd, number });

@@ -5,6 +5,7 @@ import generator from 'cpf_and_cnpj-generator';
 
 import { TCreateUser, User } from './user';
 import { Address, Cpf, Email, Password, Telephone } from '../../value-objects';
+import { EBrazilStates } from '../../enums/brazil-states';
 
 describe(`#${User.name}`, _ => {
 	let validUserProps: TCreateUser | undefined = undefined;
@@ -12,19 +13,35 @@ describe(`#${User.name}`, _ => {
 	// Arrange
 	beforeEach(_ => {
 		const email: Email = Email.create({ email: faker.internet.email() })
-		const password = Password.create({
+		const password: Password = Password.create({
 			password: 'Aa123!@aX'
 		});
-		const cpf = Cpf.create({ cpf: generator.generateCpf() });
+		const cpf: Cpf = Cpf.create({ cpf: generator.generateCpf() });
+		const telephone: Telephone = Telephone.create({
+			ddd: faker.number.int({ min: 10, max: 100 }),
+			number: `${faker.number.bigInt({ min: 8, max: 9 })}`
+		});
+		const address: Address = Address.create({
+			cep: `${faker.location.zipCode()}`,
+			city: faker.location.city(),
+			neighborhood: faker.string.alpha(),
+			number: faker.location.buildingNumber(),
+			state: EBrazilStates.AC,
+			street: faker.location.street(),
+			coordinates: {
+				latitude: faker.location.latitude({ precision: 10 }),
+				longitude: faker.location.longitude({ precision: 10 })
+			}
+		});
 
 		validUserProps = {
 			name: faker.string.alpha({ length: { min: 3, max: 50 } }),
 			lastName: faker.string.alpha({ length: { min: 3, max: 50 } }),
-			addresses: [new Address()],
+			addresses: [address],
 			cpf,
 			email,
 			password,
-			telephones: [new Telephone()],
+			telephones: [telephone],
 			username: faker.string.alpha({ length: { min: 3, max: 16 } }),
 		};
 	});
