@@ -1,5 +1,5 @@
 {
-  "name": "front-end",
+  "name": "@saas-erp/front-end",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -18,7 +18,8 @@
   "dependencies": {
     "pinia": "^2.2.6",
     "vue": "^3.5.12",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "@saas/ui-kit": "workspace:*"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.2",

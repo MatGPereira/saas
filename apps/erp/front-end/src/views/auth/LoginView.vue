@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 
+import { Input } from '@saas/ui-kit/components/Input'
+
 import googleIcon from '@/assets/google-ico.svg';
 import githubIcon from '@/assets/github-ico.svg';
 </script>
@@ -40,17 +42,21 @@ import githubIcon from '@/assets/github-ico.svg';
     >
       <fieldset>
         <label for="email">E-mail</label>
-        <input
-          type="email"
-          placeholder="email@example.com"
-        />
+        <Input.Root>
+          <Input.Base
+            type="email"
+            placeholder="email@example.com"
+          />
+        </Input.Root>
       </fieldset>
       <fieldset>
         <label for="password">Senha</label>
-        <input
-          type="password"
-          placeholder="*********"
-        />
+        <Input.Root>
+          <Input.Base
+            type="password"
+            placeholder="*********"
+          />
+        </Input.Root>
       </fieldset>
       <button type="submit">Entrar</button>
     </form>
