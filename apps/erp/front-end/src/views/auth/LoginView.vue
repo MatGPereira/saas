@@ -2,6 +2,7 @@
 import { RouterLink } from 'vue-router';
 
 import { Input } from '@saas/ui-kit/components/Input'
+import { Icon } from '@saas/ui-kit/components/Icon'
 
 import googleIcon from '@/assets/google-ico.svg';
 import githubIcon from '@/assets/github-ico.svg';
@@ -13,20 +14,16 @@ import githubIcon from '@/assets/github-ico.svg';
     <h1>Faça login com</h1>
     <div class="c-auth__actions">
       <button type="button">
-        <img
+        <Icon.Base
           :src="googleIcon"
-          alt=""
-          aria-hidden="true"
-          class="c-icon"
+          :size="12"
         />
         Google
       </button>
       <button type="button">
-        <img
+        <Icon.Base
           :src="githubIcon"
-          alt=""
-          aria-hidden="true"
-          class="c-icon"
+          :size="12"
         />
         GitHub
       </button>
@@ -113,11 +110,6 @@ h1 {
     justify-content: center;
     cursor: pointer;
   }
-}
-
-.c-icon {
-  height: .75rem;
-  width: .75rem;
 }
 
 .c-separator {
