@@ -21,7 +21,7 @@ class EmailValidator extends AbstractValidator<TEmailCreate> {
       );
     }
 
-    const emailParts: string[] = email.split('@');
+    const emailParts: string[] = email?.split('@');
 
     const emailHasNotAccountOrDomain: boolean = emailParts.length !== 2;
     const emailHasInvalidFormat: boolean = !EmailValidator.EMAIL_REGEX.test(email);
@@ -34,20 +34,20 @@ class EmailValidator extends AbstractValidator<TEmailCreate> {
 
     const account: string = emailParts[0];
     const address: string = emailParts[1];
-    if (account.length > EmailValidator.MAX_ACCOUNT_LENGTH) {
+    if (account?.length > EmailValidator.MAX_ACCOUNT_LENGTH) {
       this.addDomainError(
         new DomainError('Email account is too long!')
       );
     }
 
-    if (address.length > EmailValidator.MAX_ADDRESS_LENGTH) {
+    if (address?.length > EmailValidator.MAX_ADDRESS_LENGTH) {
       this.addDomainError(
         new DomainError('Email address is too long!')
       );
     }
 
-    const domainParts: string[] = address.split('.');
-    const hasSomeDomainPartTooLong: boolean = domainParts.some(
+    const domainParts: string[] = address?.split('.');
+    const hasSomeDomainPartTooLong: boolean = domainParts?.some(
       part => part.length > EmailValidator.MAX_DOMAIN_LENGTH
     );
     if (hasSomeDomainPartTooLong) {

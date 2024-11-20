@@ -31,17 +31,11 @@ class AddressValidator extends AbstractValidator<TAddressCreate> {
   }
 
   private validateCep(cep: string) {
-    const numericCEP = cep.replace(/\D/g, '');
+    const numericCep: string = cep.replace(/\D/g, '');
 
-    if (numericCEP.length !== 8) {
+    if (numericCep.length !== 8) {
       this.addDomainError(
         new DomainError('Cep with invalid length! Should be eight')
-      );
-    }
-
-    if (parseInt(numericCEP, 10) === 0) {
-      this.addDomainError(
-        new DomainError('Cep with invalid beginning!')
       );
     }
   }
