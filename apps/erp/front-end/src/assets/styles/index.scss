@@ -2,10 +2,14 @@
 
 @use 'sass:meta';
 
-@layer settings, generics, elements;
+@layer settings, tools, generics, elements;
 
 @layer settings {
   @include meta.load-css('settings');
+}
+
+@layer tools {
+  @include meta.load-css('tools');
 }
 
 @layer generics {

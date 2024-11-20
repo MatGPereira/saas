@@ -6,14 +6,14 @@
   --color-brand-lightness: 61%;
 
   --color-brand: hsl(
-    var(--color-brand-hue),
+    var(--color-brand-hue)
     var(--color-brand-saturation)
     var(--color-brand-lightness)
   );
   --color-brand-gradient: linear-gradient(
     to right,
-    var(--color-brand),
-    hsl(283 94% 25%)
+    hsl(283 94% 25%),
+    var(--color-brand)
   );
 
   --color-gray-950: hsl(0 0% 0%);
@@ -33,6 +33,7 @@
 .dark:root {
   --color-gray-50: hsl(0 0% 10%);
   --color-gray-100: hsl(0 0% 16%);
+  --color-gray-950: hsl(0 0% 100%);
 
   --color-gray-overlay: hsl(0 0% 10% / 0.55);
 }
