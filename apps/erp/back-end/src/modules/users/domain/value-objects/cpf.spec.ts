@@ -17,10 +17,10 @@ describe(`#${Cpf.name}`, () => {
 
   it(`should be able to create an (#${Cpf.name}) value object`, _ => {
     // Act
-    const user: Cpf = Cpf.create(validCpfProps!);
+    const cpf: Cpf = Cpf.create(validCpfProps!);
 
     // Assert
-    expect(user).toEqual(
+    expect(cpf).toEqual(
       expect.objectContaining({
         _value: expect.any(String),
       })
