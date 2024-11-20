@@ -40,24 +40,24 @@ import githubIcon from '@/assets/github-ico.svg';
       method="POST"
       class="c-auth__form"
     >
-      <fieldset>
-        <label for="email">E-mail</label>
-        <Input.Root>
-          <Input.Base
-            type="email"
-            placeholder="email@example.com"
-          />
-        </Input.Root>
-      </fieldset>
-      <fieldset>
-        <label for="password">Senha</label>
-        <Input.Root>
-          <Input.Base
-            type="password"
-            placeholder="*********"
-          />
-        </Input.Root>
-      </fieldset>
+      <Input.Root>
+        <Input.Label for="email">E-mail</Input.Label>
+        <Input.Base
+          type="email"
+          placeholder="email@example.com"
+          id="email"
+          name="email"
+        />
+      </Input.Root>
+      <Input.Root>
+        <Input.Label for="password">Senha</Input.Label>
+        <Input.Base
+          type="password"
+          placeholder="*********"
+          id="password"
+          name="password"
+        />
+      </Input.Root>
       <button type="submit">Entrar</button>
     </form>
     <RouterLink

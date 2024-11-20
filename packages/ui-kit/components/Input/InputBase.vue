@@ -2,18 +2,14 @@
 import type { InputTypeHTMLAttribute } from 'vue';
 
 interface IInputProps {
-  type?: InputTypeHTMLAttribute,
-  placeholder?: string
+  type?: InputTypeHTMLAttribute;
 }
 
-const props = defineProps<IInputProps>();
+const inputBaseProps = defineProps<IInputProps>();
 </script>
 
 <template>
-  <input
-    :type="props.type"
-    :placeholder="props.placeholder"
-  />
+  <input :type="inputBaseProps.type || 'text'" />
 </template>
 
 <style scoped lang="scss">
