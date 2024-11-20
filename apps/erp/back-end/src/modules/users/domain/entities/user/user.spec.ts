@@ -6,6 +6,9 @@ import generator from 'cpf_and_cnpj-generator';
 import { TCreateUser, User } from './user';
 import { Address, Cpf, Email, Password, Telephone } from '../../value-objects';
 import { EBrazilStates } from '../../enums/brazil-states';
+import { EBrazilDdd } from '../../value-objects/validators/telephone-validator-constants';
+
+const validDdds: string[] = Object.keys(EBrazilDdd).filter(ddd => +ddd);
 
 describe(`#${User.name}`, _ => {
 	let validUserProps: TCreateUser | undefined = undefined;
@@ -18,8 +21,8 @@ describe(`#${User.name}`, _ => {
 		});
 		const cpf: Cpf = Cpf.create({ cpf: generator.generateCpf() });
 		const telephone: Telephone = Telephone.create({
-			ddd: faker.number.int({ min: 10, max: 100 }),
-			number: `${faker.number.bigInt({ min: 8, max: 9 })}`
+			ddd: +faker.helpers.arrayElement(validDdds),
+			number: `${faker.number.bigInt({ min: 61111111, max: 99999999 })}`
 		});
 		const address: Address = Address.create({
 			cep: '01001000',
