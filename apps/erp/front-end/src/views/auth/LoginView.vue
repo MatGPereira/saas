@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 
-import { Input } from '@saas/ui-kit/components/Input'
-import { Icon } from '@saas/ui-kit/components/Icon'
-import { Separator } from '@saas/ui-kit/components/Separator';
+import { Button, Icon, Input, Separator } from '@saas/ui-kit/components'
 
 import googleIcon from '@/assets/google-ico.svg';
 import githubIcon from '@/assets/github-ico.svg';
@@ -14,20 +12,24 @@ import githubIcon from '@/assets/github-ico.svg';
     <div class="c-logo"></div>
     <h1>Faça login com</h1>
     <div class="c-auth__actions">
-      <button type="button">
-        <Icon.Base
-          :src="googleIcon"
-          :size="12"
-        />
-        Google
-      </button>
-      <button type="button">
-        <Icon.Base
-          :src="githubIcon"
-          :size="12"
-        />
-        GitHub
-      </button>
+      <Button.Root>
+        <Button.Base>
+          <Icon.Base
+            :src="googleIcon"
+            :size="12"
+          />
+          Google
+        </Button.Base>
+      </Button.Root>
+      <Button.Root>
+        <Button.Base>
+          <Icon.Base
+            :src="githubIcon"
+            :size="12"
+          />
+          GitHub
+        </Button.Base>
+      </Button.Root>
     </div>
     <Separator.Root class="c-separator">
       <Separator.Base />
@@ -56,7 +58,9 @@ import githubIcon from '@/assets/github-ico.svg';
           name="password"
         />
       </Input.Root>
-      <button type="submit">Entrar</button>
+      <Button.Root>
+        <Button.Base type="submit">Entrar</Button.Base>
+      </Button.Root>
     </form>
     <RouterLink
       to=""
@@ -169,6 +173,7 @@ h1 {
     border: none;
     border-radius: 4px;
     color: color(gray-950);
+    cursor: pointer;
   }
 }
 
