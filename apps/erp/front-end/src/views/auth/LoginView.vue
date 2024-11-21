@@ -3,6 +3,7 @@ import { RouterLink } from 'vue-router';
 
 import { Input } from '@saas/ui-kit/components/Input'
 import { Icon } from '@saas/ui-kit/components/Icon'
+import { Separator } from '@saas/ui-kit/components/Separator';
 
 import googleIcon from '@/assets/google-ico.svg';
 import githubIcon from '@/assets/github-ico.svg';
@@ -28,11 +29,11 @@ import githubIcon from '@/assets/github-ico.svg';
         GitHub
       </button>
     </div>
-    <div class="c-separator">
-      <hr />
+    <Separator.Root class="c-separator">
+      <Separator.Base />
       <span>ou</span>
-      <hr />
-    </div>
+      <Separator.Base />
+    </Separator.Root>
     <form
       method="POST"
       class="c-auth__form"
