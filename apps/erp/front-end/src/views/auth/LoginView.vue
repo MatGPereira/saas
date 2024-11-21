@@ -47,6 +47,8 @@ import githubIcon from '@/assets/github-ico.svg';
           placeholder="email@example.com"
           id="email"
           name="email"
+          required
+          aria-required="true"
         />
       </Input.Root>
       <Input.Root>
@@ -56,6 +58,8 @@ import githubIcon from '@/assets/github-ico.svg';
           placeholder="*********"
           id="password"
           name="password"
+          required
+          aria-required="true"
         />
       </Input.Root>
       <Button.Root>
