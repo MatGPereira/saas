@@ -7,7 +7,7 @@
     "build": "run-s build:tsup build:obfuscate",
     "build:tsup": "tsup src --out-dir build --minify",
     "build:obfuscate": "javascript-obfuscator build --output build/ --config obfuscator-config.json",
-    "tests:unit": "vitest run",
+    "tests:unit": "vitest run --dir ./src/",
     "tests:unit:ui": "vitest --ui",
     "tests:unit:watch": "vitest"
   },
