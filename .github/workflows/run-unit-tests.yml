@@ -30,4 +30,4 @@ jobs:
         run: pnpm install
 
       - name: Execute unit tests
-        run: pnpm tests:unit --if-present
+        run: pnpm tests:unit
