@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsup src --out-dir build",
+    "build": "run-s build:tsup build:obfuscate",
+    "build:tsup": "tsup src --out-dir build --minify",
+    "build:obfuscate": "javascript-obfuscator build --output build/ --config obfuscator-config.json",
     "tests:unit": "vitest run",
     "tests:unit:ui": "vitest --ui",
     "tests:unit:watch": "vitest"
@@ -14,6 +16,8 @@
     "@types/node": "22.9.0",
     "@vitest/ui": "2.1.4",
     "cpf_and_cnpj-generator": "1.1.5",
+    "javascript-obfuscator": "4.1.1",
+    "npm-run-all2": "^7.0.1",
     "tsup": "8.3.5",
     "tsx": "4.19.2",
     "typescript": "5.6.3",

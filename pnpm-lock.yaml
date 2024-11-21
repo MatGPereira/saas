@@ -26,6 +26,12 @@ importers:
       cpf_and_cnpj-generator:
         specifier: 1.1.5
         version: 1.1.5
+      javascript-obfuscator:
+        specifier: 4.1.1
+        version: 4.1.1
+      npm-run-all2:
+        specifier: ^7.0.1
+        version: 7.0.1
       tsup:
         specifier: 8.3.5
         version: 8.3.5(postcss@8.4.49)(tsx@4.19.2)(typescript@5.6.3)
