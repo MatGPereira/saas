@@ -1,5 +1,16 @@
 {
+	"name": "@saas/base",
+	"scripts": {
+		"build": "turbo build",
+		"start:dev": "turbo start:dev",
+		"start:dev:host": "turbo start:dev:host",
+		"tests:unit": "turbo tests:unit"
+	},
 	"dependencies": {
 		"turbo": "^2.2.3"
-	}
+	},
+	"engines": {
+		"node": ">=18"
+	},
+	"packageManager": "pnpm@9.12.3"
 }
