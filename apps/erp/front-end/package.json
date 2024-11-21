@@ -16,10 +16,10 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@saas/ui-kit": "workspace:*",
     "pinia": "^2.2.6",
     "vue": "^3.5.12",
-    "vue-router": "^4.4.5",
-    "@saas/ui-kit": "workspace:*"
+    "vue-router": "^4.4.5"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.2",
@@ -41,6 +41,7 @@
     "sass": "1.81.0",
     "typescript": "~5.6.3",
     "vite": "^5.4.10",
+    "vite-plugin-javascript-obfuscator": "3.1.0",
     "vite-plugin-vue-devtools": "^7.5.4",
     "vitest": "^2.1.4",
     "vue-tsc": "^2.1.10"
