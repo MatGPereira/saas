@@ -1,3 +1,4 @@
+import { resolve } from 'node:path';
 import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
@@ -22,4 +23,12 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  build: {
+    lib: {
+      name: 'ui-kit',
+      entry: {
+        index: resolve(__dirname, './components/index.ts')
+      }
+    }
+  }
 })
