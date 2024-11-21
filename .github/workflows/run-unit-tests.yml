@@ -1,6 +1,10 @@
 name: Run Unit Tests
 
-on: [push]
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   unit-tests:
@@ -26,4 +30,4 @@ jobs:
         run: pnpm install
 
       - name: Execute unit tests
-        run: npm tests:unit --if-present
+        run: pnpm tests:unit --if-present
