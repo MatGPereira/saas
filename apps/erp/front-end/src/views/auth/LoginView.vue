@@ -82,7 +82,7 @@ import githubIcon from '@/assets/github-ico.svg';
   align-items: center;
   display: flex;
   flex-direction: column;
-  max-width: 16rem;
+  max-width: 20rem;
   row-gap: 1rem;
   width: 100%;
 }
@@ -143,33 +143,6 @@ h1 {
   flex-direction: column;
   row-gap: 1.5rem;
   width: 100%;
-
-  fieldset {
-    display: flex;
-    flex-direction: column;
-    row-gap: .5rem;
-  }
-
-  input {
-    border-radius: 4px;
-    border: none;
-    background-color: color(gray-100);
-    padding: .75rem 1rem;
-
-    &::placeholder {
-      color: color(gray-600);
-    }
-  }
-
-  label {
-    color: color(brand);
-
-    &::after {
-      content: '*';
-      color: color(danger);
-      margin-left: .25rem;
-    }
-  }
 
   button {
     padding: .625rem;
