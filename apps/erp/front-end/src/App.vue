@@ -2,7 +2,7 @@
 import { useColorScheme } from '@/stores/color-schema';
 
 import AuthLayout from './layouts/auth/AuthLayout.vue';
-import LoginView from './views/auth/LoginView.vue';
+import LoginView from './views/auth/login/LoginView.vue';
 
 ;(() => {
   const applicationColorSchema = useColorScheme();

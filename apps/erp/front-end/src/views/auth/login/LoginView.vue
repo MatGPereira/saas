@@ -76,7 +76,7 @@ import githubIcon from '@/assets/github-ico.svg';
 </template>
 
 <style scoped lang="scss">
-@use '../../assets/styles/tools/color' as *;
+@use '../../../assets/styles/tools/color' as *;
 
 .c-auth__container {
   align-items: center;

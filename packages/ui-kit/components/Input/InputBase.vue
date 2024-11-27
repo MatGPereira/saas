@@ -39,7 +39,7 @@ const {
       v-if="rule?.validationRule(handleInputResult)"
       class="c-input__base--error-message"
     >
-      {{ rule.customErrorMessage }}
+      {{ rule?.customErrorMessage }}
     </span>
   </template>
 </template>
