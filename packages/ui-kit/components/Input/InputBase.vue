@@ -1,53 +1,47 @@
 <script lang="ts">
-import type { IInjectionResult } from './InputRoot.vue';
-import { injectionKey } from './InputRoot.vue';
+import type { IInputRootInjection } from './InputRoot.vue';
+import { inputInjectionKey } from './InputRoot.vue';
+
+interface IInputRef {
+  data?: string;
+  touched: boolean;
+  dirty: boolean;
+}
+
+export type { IInputRef };
 </script>
 
 <script setup lang="ts">
-import type { InputTypeHTMLAttribute } from 'vue';
-import { inject } from 'vue';
+import { inject, ref } from 'vue';
 
-interface IInputProps {
-  type?: InputTypeHTMLAttribute;
+const input = ref({
+  data: undefined,
+  touched: false,
+  dirty: false,
+});
+
+function handleKeyUpEvent() {
+  input.value.dirty = true
+  handleInputChanges(input);
 }
 
-const { type } = withDefaults(
-  defineProps<IInputProps>(),
-  {
-    type: 'text',
-  }
-);
-
-const {
-  handleInput,
-  rules,
-  handleInputResult
-} = inject<IInjectionResult>(injectionKey)!;
+const { handleInputChanges } = inject<IInputRootInjection>(inputInjectionKey)!;
 </script>
 
 <template>
   <input
-    @keyup="e => handleInput((<HTMLInputElement>e.target).value)"
-    :type="type"
+    v-model="input.data"
+    @keyup="handleKeyUpEvent"
+    @blur="input.touched = true"
     class="c-input__base"
   />
-  <template
-    v-for="rule in rules"
-    :key="rule.validationRule.name"
-  >
-    <span
-      v-if="rule?.validationRule(handleInputResult)"
-      class="c-input__base--error-message"
-    >
-      {{ rule?.customErrorMessage }}
-    </span>
-  </template>
 </template>
 
 <style scoped lang="scss">
 @use '../../assets/styles/tools/color' as *;
 
 .c-input__base {
+  color: color(gray-950);
   border-radius: 4px;
   border: none;
   background-color: color(gray-100);
@@ -56,10 +50,11 @@ const {
   &::placeholder {
     color: color(gray-600);
   }
-}
 
-.c-input__base--error-message {
-  font-size: .75rem;
-  color: color(danger);
+  &:focus,
+  &:focus-visible,
+  &:focus-within {
+    outline: 1px solid color(brand);
+  }
 }
 </style>

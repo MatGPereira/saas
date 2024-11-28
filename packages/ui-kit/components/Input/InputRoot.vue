@@ -1,41 +1,51 @@
 <script lang="ts">
-interface IInjectionResult {
-  handleInput(inputValue: string): void;
-  rules?: IRule[];
-  handleInputResult: string;
+import type { Ref } from 'vue';
+
+import type { IInputRef } from './InputBase.vue';
+
+const inputInjectionKey: symbol = Symbol('key:input-root');
+
+interface IInputRootInjection {
+  handleInputChanges(inputInfos: Ref<IInputRef>): void;
 }
 
 interface IRule {
-  validationRule(content: string): boolean;
-  customErrorMessage: string;
+  errorMessage: string;
+  validator(value: string): boolean;
 }
 
-const injectionKey: symbol = Symbol('provide:input-root');
-
-export type { IInjectionResult, IRule };
-export { injectionKey };
+export type { IInputRootInjection, IRule };
+export { inputInjectionKey };
 </script>
 
 <script setup lang="ts">
 import { provide, ref } from 'vue';
 
+
 interface IInputRootProps {
-  rules?: IRule[];
+  rules: IRule[];
 }
 
 const { rules } = defineProps<IInputRootProps>();
 
-const handleInputResult = ref<string>('');
-function handleInput(inputValue: string): void {
-  handleInputResult.value = inputValue
+const errors = ref<string[]>([]);
+function handleInputChanges(inputInfos: Ref<IInputRef>): void {
+  errors.value = [];
+
+  if(rules.length === 0) return;
+
+  rules.forEach(rule => {
+    const { data } = inputInfos.value;
+    if(rule.validator(data!)) errors.value.push(rule.errorMessage);
+  });
 }
 
-provide(injectionKey, { handleInput, rules, handleInputResult });
+provide(inputInjectionKey, { handleInputChanges });
 </script>
 
 <template>
   <fieldset class="c-input__root">
-    <slot :input-value="handleInputResult" />
+    <slot :errors="errors" />
   </fieldset>
 </template>
 

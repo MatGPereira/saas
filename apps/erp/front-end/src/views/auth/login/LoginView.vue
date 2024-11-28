@@ -40,18 +40,30 @@ import githubIcon from '@/assets/github-ico.svg';
       method="POST"
       class="c-auth__form"
     >
-      <Input.Root>
+      <Input.Root
+        :rules="[
+          {
+            errorMessage: 'Uma mensagem de erro',
+            validator(content: string): boolean {
+              if(content.length < 3) return true;
+              return false;
+            }
+          }
+        ]"
+        v-slot="{ errors }"
+      >
         <Input.Label for="email">E-mail</Input.Label>
         <Input.Base
           type="email"
           placeholder="email@example.com"
           id="email"
           name="email"
-          required
-          aria-required="true"
         />
+        <template v-for="error in errors" :key="error">
+          <span style="color: red;">{{ error }}</span>
+        </template>
       </Input.Root>
-      <Input.Root>
+      <!-- <Input.Root :rules="passwordValidationRules">
         <Input.Label for="password">Senha</Input.Label>
         <Input.Base
           type="password"
@@ -61,7 +73,7 @@ import githubIcon from '@/assets/github-ico.svg';
           required
           aria-required="true"
         />
-      </Input.Root>
+      </Input.Root> -->
       <Button.Root>
         <Button.Base type="submit">Entrar</Button.Base>
       </Button.Root>
