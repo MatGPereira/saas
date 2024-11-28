@@ -8,7 +8,7 @@ import type { TCreateUser } from '@/modules/users/domain/entities/user/user';
 
 import { RegisterUserUseCase } from './use-case';
 import { CryptoService } from '../../services/crypto-service';
-import { InMemoryUserRepository } from '@/modules/users/infrastructure/repositories/in-memory/user-command-repository';
+import { InMemoryUserRepository } from '@/modules/users/infrastructure/repositories/in-memory/user-repository';
 import { EBrazilStates } from '@/modules/users/domain/enums/brazil-states';
 import { generateValidDdds } from '@/common/tests/helpers/generate-valid-ddds';
 import { UniqueEntityId } from '@/common/domain/entities/unique-entity-id';

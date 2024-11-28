@@ -6,8 +6,9 @@ import { genSalt, hash } from 'bcrypt';
 import type { ICryptoService } from './abstractions/crypto-service';
 
 import { CryptoService } from './crypto-service';
+import { JwtPayload } from 'jsonwebtoken';
 
-describe(`#${CryptoService.name}`, _ => {
+describe.only(`#${CryptoService.name}`, _ => {
   let sut: ICryptoService | undefined = undefined;
   let valueToEncrypt: string | undefined = undefined;
 
@@ -70,4 +71,27 @@ describe(`#${CryptoService.name}`, _ => {
       expect(compareInvalidPasswords).toBe(false);
     }
   );
+
+  it('should be able to generate an access token', async () => {
+    // Arrange
+    const payload: Record<string, unknown> = {}
+
+    // Act
+    const accessToken: string = await sut!.generateToken(payload);
+
+    // Assert
+    expect(accessToken).toHaveLength(427);
+  });
+
+  it('should be able to verify valid token', async () => {
+    // Arrange
+    const payload: Record<string, unknown> = {}
+    const accessToken: string = await sut!.generateToken(payload);
+
+    // Act
+    const verify: string | JwtPayload = await sut!.verifyToken(accessToken);
+
+    // Assert
+    expect(verify).toBeDefined();
+  });
 });

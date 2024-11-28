@@ -51,6 +51,12 @@ class User extends Entity<TUserProps> {
 	}
 
 	private set email(value: string) { }
+
+	public get password(): Password {
+		return this.props.password;
+	}
+
+	private set password(value: string) { }
 }
 
 export { User };

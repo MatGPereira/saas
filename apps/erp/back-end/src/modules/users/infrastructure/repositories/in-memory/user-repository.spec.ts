@@ -2,7 +2,7 @@ import { describe, it, beforeEach, expect } from 'vitest';
 
 import type { TCreateUser } from '@/modules/users/domain/entities/user/user';
 
-import { InMemoryUserRepository } from './user-command-repository';
+import { InMemoryUserRepository } from './user-repository';
 import { User } from '@/modules/users/domain/entities/user/user';
 import { generateValidUserProps } from '@/common/tests/helpers/generate-valid-user-props';
 
@@ -60,4 +60,32 @@ describe(`#${InMemoryUserRepository.name}`, _ => {
       expect(hasUserWithEmail).toBe(false);
     }
   );
+
+  it('should be able to find an user with e-mail', async () => {
+    // Arrange
+    const user: User = User.create(validUserProps!);
+    await sut!.createUser(user);
+
+    // Act
+    const userWithEmail: User | null = await sut!.findUserByEmail(
+      user.email.value
+    )!;
+
+    // Assert
+    expect(userWithEmail).toBeInstanceOf(User);
+  });
+
+  it('should be able to return null when user email no exists', async () => {
+    // Arrange
+    const user: User = User.create(validUserProps!);
+    await sut!.createUser(user);
+
+    // Act
+    const userWithEmail: User | null = await sut!.findUserByEmail(
+      "invalid@email.com"
+    )!;
+
+    // Assert
+    expect(userWithEmail).toBe(null);
+  });
 });

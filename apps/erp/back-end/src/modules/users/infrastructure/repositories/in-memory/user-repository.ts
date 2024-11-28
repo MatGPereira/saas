@@ -24,6 +24,16 @@ class InMemoryUserRepository
     return false;
   }
 
+  public async findUserByEmail(email: string): Promise<User | null> {
+    const user: User | undefined = this._db.find(
+      user => email === user.email.value
+    );
+
+    if (!user) return null;
+
+    return user;
+  }
+
   public get db(): User[] {
     return this._db;
   }

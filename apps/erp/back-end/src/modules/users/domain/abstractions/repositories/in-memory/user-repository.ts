@@ -7,6 +7,7 @@ interface ICommandUserRepository {
 
 interface IReadOnlyUserRepository {
   existUserByEmail(email: string): Promise<boolean>;
+  findUserByEmail(email: string): Promise<User | null>;
 }
 
 export type { ICommandUserRepository, IReadOnlyUserRepository };
