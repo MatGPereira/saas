@@ -8,7 +8,7 @@ class Email implements IValueObject {
   public constructor(private readonly _value: string) { }
 
   public get value(): string {
-    return this.value;
+    return this._value;
   }
 
   public static create({ email }: TEmailCreate): Email {

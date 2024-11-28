@@ -18,6 +18,7 @@ class InMemoryUserCommandRepository
     const userExists: User | undefined = this._db.find(
       user => email === user.email.value
     );
+
     if (userExists) return true;
 
     return false;
