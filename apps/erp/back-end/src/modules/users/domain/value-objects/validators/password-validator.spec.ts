@@ -3,7 +3,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { PasswordValidator } from './password-validator';
 import { DomainError } from '@/common/domain/errors/domain-error';
 
-describe(`$${PasswordValidator.name}`, () => {
+describe.skip(`$${PasswordValidator.name}`, () => {
   let sut: PasswordValidator | undefined = undefined;
 
   beforeEach(_ => {

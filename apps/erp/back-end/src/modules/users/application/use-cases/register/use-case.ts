@@ -32,11 +32,11 @@ class RegisterUserUseCase implements IRegisterUserUseCase {
     const [passwordHash, salt]: [string, string] = await this.cryptoService.encrypt(password);
     const user: User = User.create({
       addresses: this.buildAddresses(addresses),
-      cpf: new Cpf(cpf),
-      email: new Email(email),
+      cpf: Cpf.create({ cpf }),
+      email: Email.create({ email }),
       lastName,
       name,
-      password: new Password(passwordHash),
+      password: Password.create({ password: passwordHash }),
       salt,
       telephones: this.buildTelephones(telephones),
       tenantId,

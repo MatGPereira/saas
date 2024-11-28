@@ -25,7 +25,7 @@ describe(`#${RegisterUserUseCase.name}`, _ => {
   let registerUserUseCaseCommand: IRegisterUserUseCaseCommand | undefined = undefined;
 
   // Arrange
-  beforeEach(_ => {
+  beforeEach(async () => {
     cryptoService = new CryptoService();
     inMemoryCommandUserRepository = new InMemoryUserRepository();
     inMemoryReadOnlyUserRepository = inMemoryCommandUserRepository;
@@ -51,13 +51,16 @@ describe(`#${RegisterUserUseCase.name}`, _ => {
       ddd: +faker.helpers.arrayElement(generateValidDdds()),
       number: `${faker.number.bigInt({ min: 61111111, max: 99999999 })}`
     }
+    const [hashedPassword]: [string, string] = await cryptoService.encrypt(
+      faker.string.alpha({ length: 9 })
+    );
     registerUserUseCaseCommand = {
       addresses: [address],
       cpf: generator.generateCpf(),
       email: faker.internet.email(),
       lastName: faker.person.lastName(),
       name: faker.person.firstName(),
-      password: faker.string.alpha({ length: 9 }),
+      password: hashedPassword,
       telephones: [telephone],
       tenantId: new UniqueEntityId(),
     }

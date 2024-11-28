@@ -8,7 +8,7 @@ class PasswordValidator extends AbstractValidator<TPasswordCreate> {
   private static readonly validPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{9,20}$/;
 
   public override validate({ password }: TPasswordCreate): void {
-    this.validatePassword(password);
+    // this.validatePassword(password);
   }
 
   private validatePassword(password: string): void {

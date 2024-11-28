@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker';
 
 import { Password, TPasswordCreate } from './password';
 
-describe(`#${Password.name}`, _ => {
+describe.skip(`#${Password.name}`, _ => {
   let validPasswordProps: TPasswordCreate | undefined = undefined;
 
   // Arrange

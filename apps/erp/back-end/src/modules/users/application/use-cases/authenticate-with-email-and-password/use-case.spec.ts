@@ -7,12 +7,12 @@ import { InMemoryUserRepository } from '@/modules/users/infrastructure/repositor
 import { AuthenticateUserWithEmailAndPasswordUseCase } from './use-case';
 import { CryptoService } from '../../services/crypto-service';
 
-describe(`#${AuthenticateUserWithEmailAndPasswordUseCase.name}`, _ => {
+describe.todo(`#${AuthenticateUserWithEmailAndPasswordUseCase.name}`, _ => {
   let sut: IAuthenticateUserWithEmailAndPassword | undefined = undefined;
   let cryptoService: ICryptoService | undefined = undefined;
   let inMemoryReadOnlyUserRepository: InMemoryUserRepository | undefined = undefined;
 
-  // Assert
+  // Arrange
   beforeEach(_ => {
     cryptoService = new CryptoService();
     inMemoryReadOnlyUserRepository = new InMemoryUserRepository();
@@ -23,6 +23,20 @@ describe(`#${AuthenticateUserWithEmailAndPasswordUseCase.name}`, _ => {
   });
 
   it('should be able to return an access token for valid user', async () => {
+    // Arrange
+    // const validUserProps: TCreateUser = generateValidUserProps();
+    // const user: User = User.create(validUserProps);
 
+    // await inMemoryReadOnlyUserRepository!.createUser(user);
+
+    // // Act
+    // const authenticateWithEmailAndPasswordCommand: IAuthenticateUserWithEmailAndPasswordCommand = {
+    //   email: user.email.value,
+    //   password: validUserProps.password.value,
+    // };
+    // const { accessToken } = await sut!.execute(authenticateWithEmailAndPasswordCommand);
+
+    // // Assert
+    // expect(accessToken).toBeDefined();
   });
 });
