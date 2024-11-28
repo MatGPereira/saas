@@ -6,7 +6,7 @@ import { genSalt, hash, compare } from 'bcrypt';
 class CryptoService implements ICryptoService {
 
   public async encrypt(value: string): Promise<[string, string]> {
-    const salt: string = await genSalt();
+    const salt: string = await genSalt(8);
     const passwordHash: string = await hash(value, salt);
 
     return [passwordHash, salt];
