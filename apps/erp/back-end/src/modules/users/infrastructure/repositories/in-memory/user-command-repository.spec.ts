@@ -2,17 +2,17 @@ import { describe, it, beforeEach, expect } from 'vitest';
 
 import type { TCreateUser } from '@/modules/users/domain/entities/user/user';
 
-import { InMemoryUserCommandRepository } from './user-command-repository';
+import { InMemoryUserRepository } from './user-command-repository';
 import { User } from '@/modules/users/domain/entities/user/user';
 import { generateValidUserProps } from '@/common/tests/helpers/generate-valid-user-props';
 
-describe(`#${InMemoryUserCommandRepository.name}`, _ => {
-  let inMemoryUserRepository: InMemoryUserCommandRepository | undefined = undefined;
+describe(`#${InMemoryUserRepository.name}`, _ => {
+  let inMemoryUserRepository: InMemoryUserRepository | undefined = undefined;
   let validUserProps: TCreateUser | undefined = undefined;
 
   // Arrange
   beforeEach(_ => {
-    inMemoryUserRepository = new InMemoryUserCommandRepository();
+    inMemoryUserRepository = new InMemoryUserRepository();
     validUserProps = generateValidUserProps();
   });
 
@@ -42,4 +42,22 @@ describe(`#${InMemoryUserCommandRepository.name}`, _ => {
     // Assert
     expect(hasUserWithEmail).toBe(true);
   });
+
+  it(
+    'should return false if user cannot exists when existUserByEmail was called',
+    async () => {
+      // Arrange
+      const differentUserEmail: string = "jhon@doe.com";
+      const user: User = User.create(validUserProps!);
+      await inMemoryUserRepository!.createUser(user);
+
+      // Act
+      const hasUserWithEmail: boolean = await inMemoryUserRepository!.existUserByEmail(
+        differentUserEmail
+      );
+
+      // Assert
+      expect(hasUserWithEmail).toBe(false);
+    }
+  );
 });

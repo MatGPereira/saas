@@ -3,7 +3,7 @@ import type { ICommandUserRepository, IReadOnlyUserRepository } from "@/modules/
 import { User } from "@/modules/users/domain/entities/user/user";
 import { UniqueEntityId } from "@/common/domain/entities/unique-entity-id";
 
-class InMemoryUserCommandRepository
+class InMemoryUserRepository
   implements ICommandUserRepository, IReadOnlyUserRepository {
 
   private _db: User[] = [];
@@ -33,4 +33,4 @@ class InMemoryUserCommandRepository
   }
 }
 
-export { InMemoryUserCommandRepository };
+export { InMemoryUserRepository };
