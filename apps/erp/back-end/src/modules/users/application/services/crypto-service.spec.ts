@@ -8,7 +8,7 @@ import type { ICryptoService } from './abstractions/crypto-service';
 import { CryptoService } from './crypto-service';
 import { JwtPayload } from 'jsonwebtoken';
 
-describe.only(`#${CryptoService.name}`, _ => {
+describe(`#${CryptoService.name}`, _ => {
   let sut: ICryptoService | undefined = undefined;
   let valueToEncrypt: string | undefined = undefined;
 
