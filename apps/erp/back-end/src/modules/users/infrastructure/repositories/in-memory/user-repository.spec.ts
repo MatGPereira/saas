@@ -4,7 +4,7 @@ import type { TCreateUser } from '@/modules/users/domain/entities/user/user';
 
 import { InMemoryUserRepository } from './user-repository';
 import { User } from '@/modules/users/domain/entities/user/user';
-import { generateValidUserProps } from '@/common/tests/helpers/generate-valid-user-props';
+import { generateValidUserProps } from '@/helpers/generate-valid-user-props';
 
 describe(`#${InMemoryUserRepository.name}`, _ => {
   let sut: InMemoryUserRepository | undefined = undefined;

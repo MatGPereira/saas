@@ -10,11 +10,11 @@ import { RegisterUserUseCase } from './use-case';
 import { CryptoService } from '../../services/crypto-service';
 import { InMemoryUserRepository } from '@/modules/users/infrastructure/repositories/in-memory/user-repository';
 import { EBrazilStates } from '@/modules/users/domain/enums/brazil-states';
-import { generateValidDdds } from '@/common/tests/helpers/generate-valid-ddds';
+import { generateValidDdds } from '@/helpers/generate-valid-ddds';
 import { UniqueEntityId } from '@/common/domain/entities/unique-entity-id';
 import { IRegisterUserUseCase } from './use-case-abstraction';
 import { User } from '@/modules/users/domain/entities/user/user';
-import { generateValidUserProps } from '@/common/tests/helpers/generate-valid-user-props';
+import { generateValidUserProps } from '@/helpers/generate-valid-user-props';
 
 describe(`#${RegisterUserUseCase.name}`, _ => {
   let sut: IRegisterUserUseCase | undefined = undefined;

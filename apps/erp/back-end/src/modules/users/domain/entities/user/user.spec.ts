@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 
 import { TCreateUser, User } from './user';
-import { generateValidUserProps } from '@/common/tests/helpers/generate-valid-user-props';
+import { generateValidUserProps } from '@/helpers/generate-valid-user-props';
 
 describe(`#${User.name}`, _ => {
 	let validUserProps: TCreateUser | undefined = undefined;
