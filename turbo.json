@@ -24,6 +24,10 @@
     "tests:unit": {
       "dependsOn": [],
       "cache": false
+    },
+    "tests:unit:coverage": {
+      "dependsOn": [],
+      "cache": false
     }
   }
 }

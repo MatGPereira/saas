@@ -8,18 +8,27 @@
     "build:tsup": "tsup src --out-dir build --minify",
     "build:obfuscate": "javascript-obfuscator build --output build/ --config obfuscator-config.json",
     "tests:unit": "vitest run --dir ./src/",
+    "tests:unit:watch": "vitest",
     "tests:unit:ui": "vitest --ui",
-    "tests:unit:watch": "vitest"
+    "tests:unit:coverage": "run-p tests:unit:coverage:v8 tests:unit:reporter",
+    "tests:unit:reporter": "vitest run --dir ./src/ --reporter=html --output-file=./coverage/last-reporter/index.html",
+    "tests:unit:coverage:v8": "vitest run --coverage",
+    "bench:unit": "vitest bench"
+  },
+  "dependencies": {
+    "bcrypt": "5.1.1",
+    "jsonwebtoken": "9.0.2"
   },
   "devDependencies": {
     "@faker-js/faker": "9.2.0",
     "@types/bcrypt": "5.0.2",
     "@types/jsonwebtoken": "9.0.7",
     "@types/node": "22.9.0",
+    "@vitest/coverage-v8": "2.1.6",
     "@vitest/ui": "2.1.4",
     "cpf_and_cnpj-generator": "1.1.5",
     "javascript-obfuscator": "4.1.1",
-    "npm-run-all2": "^7.0.1",
+    "npm-run-all2": "7.0.1",
     "tsup": "8.3.5",
     "tsx": "4.19.2",
     "typescript": "5.6.3",
@@ -29,9 +38,5 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "pnpm@9.12.3",
-  "dependencies": {
-    "bcrypt": "5.1.1",
-    "jsonwebtoken": "9.0.2"
-  }
+  "packageManager": "pnpm@9.12.3"
 }

@@ -1,9 +1,9 @@
 import { describe, it, beforeEach } from 'vitest';
 
 import type { IAuthenticateUserWithEmailAndPassword } from './use-case-abstraction';
-import { InMemoryUserRepository } from '@/modules/users/infrastructure/repositories/in-memory/user-repository';
 import type { ICryptoService } from '../../services/abstractions/crypto-service';
 
+import { InMemoryUserRepository } from '@/modules/users/infrastructure/repositories/in-memory/user-repository';
 import { AuthenticateUserWithEmailAndPasswordUseCase } from './use-case';
 import { CryptoService } from '../../services/crypto-service';
 
