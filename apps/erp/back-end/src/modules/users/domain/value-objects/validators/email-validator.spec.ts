@@ -4,10 +4,10 @@ import { EmailValidator } from './email-validator';
 import { DomainError } from '@/common/domain/errors/domain-error';
 
 describe(`$${EmailValidator.name}`, () => {
-  let validator: EmailValidator | undefined = undefined;
+  let sut: EmailValidator | undefined = undefined;
 
   beforeEach(() => {
-    validator = new EmailValidator();
+    sut = new EmailValidator();
   });
 
   it('should not add errors for a valid email', () => {
@@ -15,10 +15,10 @@ describe(`$${EmailValidator.name}`, () => {
     const validEmail = 'user@example.com';
 
     // Act
-    validator!.validate({ email: validEmail });
+    sut!.validate({ email: validEmail });
 
     // Assert
-    expect(validator!.isValid()).toBe(true);
+    expect(sut!.isValid()).toBe(true);
   });
 
   it('should add an error if email is empty', () => {
@@ -26,11 +26,11 @@ describe(`$${EmailValidator.name}`, () => {
     const emptyEmail = '';
 
     // Act
-    validator!.validate({ email: emptyEmail });
+    sut!.validate({ email: emptyEmail });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Email is required!')
     );
   });
@@ -40,11 +40,11 @@ describe(`$${EmailValidator.name}`, () => {
     const invalidEmail = 'invalid-email';
 
     // Act
-    validator!.validate({ email: invalidEmail });
+    sut!.validate({ email: invalidEmail });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Invalid email format!')
     );
   });
@@ -55,11 +55,11 @@ describe(`$${EmailValidator.name}`, () => {
     const email = `${longAccount}@example.com`;
 
     // Act
-    validator!.validate({ email });
+    sut!.validate({ email });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Email account is too long!')
     );
   });
@@ -70,11 +70,11 @@ describe(`$${EmailValidator.name}`, () => {
     const email = `user@${longAddress}`;
 
     // Act
-    validator!.validate({ email });
+    sut!.validate({ email });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Email address is too long!')
     );
   });
@@ -85,11 +85,11 @@ describe(`$${EmailValidator.name}`, () => {
     const email = `user@${longDomainPart}.com`;
 
     // Act
-    validator!.validate({ email });
+    sut!.validate({ email });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Some email domain is too long!')
     );
   });
@@ -99,11 +99,11 @@ describe(`$${EmailValidator.name}`, () => {
     const invalidEmail = 'a'.repeat(70) + '@' + 'b'.repeat(300);
 
     // Act
-    validator!.validate({ email: invalidEmail });
+    sut!.validate({ email: invalidEmail });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toEqual([
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toEqual([
       new DomainError('Invalid email format!'),
       new DomainError('Email account is too long!'),
       new DomainError('Email address is too long!'),
@@ -116,11 +116,11 @@ describe(`$${EmailValidator.name}`, () => {
     const emailWithNoAccountOrDomain = 'invalid@';
 
     // Act
-    validator!.validate({ email: emailWithNoAccountOrDomain });
+    sut!.validate({ email: emailWithNoAccountOrDomain });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Invalid email format!')
     );
   });

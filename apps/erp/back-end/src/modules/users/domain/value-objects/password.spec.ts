@@ -16,10 +16,10 @@ describe(`#${Password.name}`, _ => {
 
   it(`should be able to create an (#${Password.name}) value object`, _ => {
     // Act
-    const user: Password = Password.create(validPasswordProps!);
+    const sut: Password = Password.create(validPasswordProps!);
 
     // Assert
-    expect(user).toEqual(
+    expect(sut).toEqual(
       expect.objectContaining({
         _value: expect.any(String),
       })

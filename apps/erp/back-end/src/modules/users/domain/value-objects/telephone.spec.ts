@@ -14,9 +14,9 @@ describe(`#${Telephone.name}`, _ => {
     (ddd: number, number: string) => {
       const validTelephoneProps: TTelephoneCreate = { ddd, number };
 
-      const telephone = Telephone.create(validTelephoneProps);
+      const sut = Telephone.create(validTelephoneProps);
 
-      expect(telephone).toEqual(
+      expect(sut).toEqual(
         expect.objectContaining({
           value: expect.objectContaining({
             ddd: expect.any(Number),
@@ -24,7 +24,7 @@ describe(`#${Telephone.name}`, _ => {
           })
         })
       );
-      expect(telephone.toString()).toBe(`${ddd}${number}`);
+      expect(sut.toString()).toBe(`${ddd}${number}`);
     }
   );
 

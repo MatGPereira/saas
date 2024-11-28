@@ -17,10 +17,10 @@ describe(`#${Email.name}`, _ => {
 
   it(`should be able to create an (#${Email.name}) value object`, _ => {
     // Act
-    const user: Email = Email.create(validEmailProps!);
+    const sut: Email = Email.create(validEmailProps!);
 
     // Assert
-    expect(user).toEqual(
+    expect(sut).toEqual(
       expect.objectContaining({
         _value: expect.any(String),
       })

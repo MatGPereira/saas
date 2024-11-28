@@ -4,10 +4,10 @@ import { CpfValidator } from './cpf-validator';
 import { DomainError } from '@/common/domain/errors/domain-error';
 
 describe(`$${CpfValidator.name}`, () => {
-  let validator: CpfValidator | undefined = undefined;
+  let sut: CpfValidator | undefined = undefined;
 
   beforeEach(() => {
-    validator = new CpfValidator();
+    sut = new CpfValidator();
   });
 
   it('should not add errors for a valid CPF', () => {
@@ -15,10 +15,10 @@ describe(`$${CpfValidator.name}`, () => {
     const validCpf = '12345678909';
 
     // Act
-    validator!.validate({ cpf: validCpf });
+    sut!.validate({ cpf: validCpf });
 
     // Assert
-    expect(validator!.isValid()).toBe(true);
+    expect(sut!.isValid()).toBe(true);
   });
 
   it('should add an error if CPF is badly formatted', () => {
@@ -26,11 +26,11 @@ describe(`$${CpfValidator.name}`, () => {
     const invalidCpfFormat = '123.456.789-09';
 
     // Act
-    validator!.validate({ cpf: invalidCpfFormat });
+    sut!.validate({ cpf: invalidCpfFormat });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Cpf is badly formatted!')
     );
   });
@@ -40,11 +40,11 @@ describe(`$${CpfValidator.name}`, () => {
     const invalidFirstDigitCpf = '12345678900';
 
     // Act
-    validator!.validate({ cpf: invalidFirstDigitCpf });
+    sut!.validate({ cpf: invalidFirstDigitCpf });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Invalid second identifier digit!')
     );
   });
@@ -54,11 +54,11 @@ describe(`$${CpfValidator.name}`, () => {
     const invalidSecondDigitCpf = '12345678901';
 
     // Act
-    validator!.validate({ cpf: invalidSecondDigitCpf });
+    sut!.validate({ cpf: invalidSecondDigitCpf });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Invalid second identifier digit!')
     );
   });
@@ -68,11 +68,11 @@ describe(`$${CpfValidator.name}`, () => {
     const invalidCpf = '123.456.78900';
 
     // Act
-    validator!.validate({ cpf: invalidCpf });
+    sut!.validate({ cpf: invalidCpf });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toEqual([
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toEqual([
       new DomainError('Cpf is badly formatted!'),
       new DomainError('Invalid first identifier digit!'),
       new DomainError('Invalid second identifier digit!')
@@ -84,11 +84,11 @@ describe(`$${CpfValidator.name}`, () => {
     const invalidCpf = '12345678900';
 
     // Act
-    validator!.validate({ cpf: invalidCpf });
+    sut!.validate({ cpf: invalidCpf });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Invalid second identifier digit!')
     );
   });

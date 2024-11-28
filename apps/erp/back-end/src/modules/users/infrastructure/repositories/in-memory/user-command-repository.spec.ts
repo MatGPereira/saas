@@ -7,12 +7,12 @@ import { User } from '@/modules/users/domain/entities/user/user';
 import { generateValidUserProps } from '@/common/tests/helpers/generate-valid-user-props';
 
 describe(`#${InMemoryUserRepository.name}`, _ => {
-  let inMemoryUserRepository: InMemoryUserRepository | undefined = undefined;
+  let sut: InMemoryUserRepository | undefined = undefined;
   let validUserProps: TCreateUser | undefined = undefined;
 
   // Arrange
   beforeEach(_ => {
-    inMemoryUserRepository = new InMemoryUserRepository();
+    sut = new InMemoryUserRepository();
     validUserProps = generateValidUserProps();
   });
 
@@ -21,21 +21,21 @@ describe(`#${InMemoryUserRepository.name}`, _ => {
     const user: User = User.create(validUserProps!);
 
     // Act
-    const createdUserId = await inMemoryUserRepository!.createUser(user);
+    const createdUserId = await sut!.createUser(user);
 
     // Assert
     expect(createdUserId).toBeDefined();
-    expect(inMemoryUserRepository!.db).toHaveLength(1);
-    expect(inMemoryUserRepository!.db[0].id.toString()).toBeDefined();
+    expect(sut!.db).toHaveLength(1);
+    expect(sut!.db[0].id.toString()).toBeDefined();
   });
 
   it('should be able to return if an specific user exists', async () => {
     // Arrange
     const user: User = User.create(validUserProps!);
-    await inMemoryUserRepository!.createUser(user);
+    await sut!.createUser(user);
 
     // Act
-    const hasUserWithEmail: boolean = await inMemoryUserRepository!.existUserByEmail(
+    const hasUserWithEmail: boolean = await sut!.existUserByEmail(
       user.email.value
     );
 
@@ -49,10 +49,10 @@ describe(`#${InMemoryUserRepository.name}`, _ => {
       // Arrange
       const differentUserEmail: string = "jhon@doe.com";
       const user: User = User.create(validUserProps!);
-      await inMemoryUserRepository!.createUser(user);
+      await sut!.createUser(user);
 
       // Act
-      const hasUserWithEmail: boolean = await inMemoryUserRepository!.existUserByEmail(
+      const hasUserWithEmail: boolean = await sut!.existUserByEmail(
         differentUserEmail
       );
 

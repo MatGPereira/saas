@@ -8,18 +8,18 @@ import type { ICryptoService } from './abstractions/crypto-service';
 import { CryptoService } from './crypto-service';
 
 describe(`#${CryptoService.name}`, _ => {
-  let cryptoService: ICryptoService | undefined = undefined;
+  let sut: ICryptoService | undefined = undefined;
   let valueToEncrypt: string | undefined = undefined;
 
   // Arrange
   beforeEach(_ => {
-    cryptoService = new CryptoService();
+    sut = new CryptoService();
     valueToEncrypt = faker.string.hexadecimal({ length: { min: 9, max: 20 } });
   });
 
   it('should be able to generate a salt', async () => {
     // Act
-    const [_, salt] = await cryptoService!.encrypt(valueToEncrypt!);
+    const [_, salt] = await sut!.encrypt(valueToEncrypt!);
 
     // Assert
     expect(salt).toBeTruthy();
@@ -28,7 +28,7 @@ describe(`#${CryptoService.name}`, _ => {
 
   it('should be able to hash any value', async () => {
     // Act
-    const [hashValue] = await cryptoService!.encrypt(valueToEncrypt!);
+    const [hashValue] = await sut!.encrypt(valueToEncrypt!);
 
     // Assert
     expect(hashValue).toBeTruthy();
@@ -39,10 +39,10 @@ describe(`#${CryptoService.name}`, _ => {
     'should be able to compare hashed password with plain text password',
     async () => {
       // Arrange
-      const [hashedValue] = await cryptoService!.encrypt(valueToEncrypt!);
+      const [hashedValue] = await sut!.encrypt(valueToEncrypt!);
 
       // Act
-      const compareValuesResult: boolean = await cryptoService!.compare(
+      const compareValuesResult: boolean = await sut!.compare(
         valueToEncrypt!,
         hashedValue
       );
@@ -58,10 +58,10 @@ describe(`#${CryptoService.name}`, _ => {
       // Arrange
       const salt: string = await genSalt();
       const invalidPassword: string = await hash(valueToEncrypt!, salt);
-      const [hashedValue] = await cryptoService!.encrypt(valueToEncrypt!);
+      const [hashedValue] = await sut!.encrypt(valueToEncrypt!);
 
       // Act
-      const compareInvalidPasswords = await cryptoService!.compare(
+      const compareInvalidPasswords = await sut!.compare(
         hashedValue!,
         invalidPassword
       );

@@ -32,10 +32,10 @@ describe(`#${Address.name}`, _ => {
       }
 
       // Act
-      const address: Address = Address.create(validAddressProps);
+      const sut: Address = Address.create(validAddressProps);
 
       // Assert
-      expect(address).toEqual(
+      expect(sut).toEqual(
         expect.objectContaining({
           _value: expect.objectContaining({
             cep: expect.any(String),

@@ -1,5 +1,5 @@
 import type { ICryptoService } from "../../services/abstractions/crypto-service";
-import type { IRegisterUseCase } from "./use-case-abstraction";
+import type { IRegisterUserUseCase } from "./use-case-abstraction";
 import type { IAddressCommand, IRegisterUserUseCaseCommand, ITelephoneCommand } from "./use-case-command";
 import type { IRegisterUserUseCaseResult } from "./use-case-result";
 import type { ICommandUserRepository, IReadOnlyUserRepository } from "@/modules/users/domain/abstractions/repositories/in-memory/user-repository";
@@ -7,7 +7,7 @@ import type { ICommandUserRepository, IReadOnlyUserRepository } from "@/modules/
 import { Address, Cpf, Email, Password, Telephone } from '@/modules/users/domain/value-objects';
 import { User } from "@/modules/users/domain/entities/user/user";
 
-class RegisterUserUseCase implements IRegisterUseCase {
+class RegisterUserUseCase implements IRegisterUserUseCase {
 
   public constructor(
     private readonly cryptoService: ICryptoService,
@@ -27,7 +27,7 @@ class RegisterUserUseCase implements IRegisterUseCase {
     username
   }: IRegisterUserUseCaseCommand): Promise<IRegisterUserUseCaseResult> {
     const userAlreadyExists: boolean = await this.userReadOnlyRepository.existUserByEmail(email);
-    if (!userAlreadyExists) throw new Error('User with same e-mail already exists');
+    if (userAlreadyExists) throw new Error('User with same e-mail already exists');
 
     const [passwordHash, salt]: [string, string] = await this.cryptoService.encrypt(password);
     const user: User = User.create({

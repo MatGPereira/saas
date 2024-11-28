@@ -4,11 +4,11 @@ import { TelephoneValidator } from './telephone-validator';
 import { DomainError } from '@/common/domain/errors/domain-error';
 
 describe(`$${TelephoneValidator.name}`, () => {
-  let validator: TelephoneValidator | undefined = undefined;
+  let sut: TelephoneValidator | undefined = undefined;
 
   // Arrange
   beforeEach(_ => {
-    validator = new TelephoneValidator();
+    sut = new TelephoneValidator();
   });
 
   it('should not add errors for a valid telephone number', () => {
@@ -16,10 +16,10 @@ describe(`$${TelephoneValidator.name}`, () => {
     const validNumber = '912345678';
 
     // Act
-    validator!.validate({ ddd: 11, number: validNumber });
+    sut!.validate({ ddd: 11, number: validNumber });
 
     // Assert
-    expect(validator!.isValid()).toBe(true);
+    expect(sut!.isValid()).toBe(true);
   });
 
   it('should add an error for an invalid telephone number', () => {
@@ -27,11 +27,11 @@ describe(`$${TelephoneValidator.name}`, () => {
     const invalidNumber = '123456';
 
     // Act
-    validator!.validate({ ddd: 11, number: invalidNumber });
+    sut!.validate({ ddd: 11, number: invalidNumber });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Invalid telephone number format!')
     );
   });
@@ -41,10 +41,10 @@ describe(`$${TelephoneValidator.name}`, () => {
     const validDDD = 11;
 
     //Act
-    validator!.validate({ ddd: validDDD, number: '912345678' });
+    sut!.validate({ ddd: validDDD, number: '912345678' });
 
     // Assert
-    expect(validator!.isValid()).toBe(true);
+    expect(sut!.isValid()).toBe(true);
   });
 
   it('should add an error for an invalid DDD', () => {
@@ -52,11 +52,11 @@ describe(`$${TelephoneValidator.name}`, () => {
     const invalidDDD = 10;
 
     // Act
-    validator!.validate({ ddd: invalidDDD, number: '912345678' });
+    sut!.validate({ ddd: invalidDDD, number: '912345678' });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Invalid DDD for Brazil country!')
     );
   });
@@ -69,13 +69,13 @@ describe(`$${TelephoneValidator.name}`, () => {
     const invalidNumber = '12345';
 
     // Act | Assert
-    validator!.validate({ ddd: validDdd, number: validNumber });
-    expect(validator!.isValid()).toBe(true);
+    sut!.validate({ ddd: validDdd, number: validNumber });
+    expect(sut!.isValid()).toBe(true);
 
     // Act | Assert
-    validator!.validate({ ddd: invalidDdd, number: invalidNumber });
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toEqual([
+    sut!.validate({ ddd: invalidDdd, number: invalidNumber });
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toEqual([
       new DomainError('Invalid telephone number format!'),
       new DomainError('Invalid DDD for Brazil country!')
     ]);

@@ -9,10 +9,10 @@ import { EBrazilStates } from '../../enums/brazil-states';
 import { EAddressValidatorConstants } from './address-validator-constants';
 
 describe(`$${AddressValidator.name}`, () => {
-  let validator: AddressValidator | undefined = undefined;
+  let sut: AddressValidator | undefined = undefined;
 
   beforeEach(() => {
-    validator = new AddressValidator();
+    sut = new AddressValidator();
   });
 
   it('should not add errors for a valid address', () => {
@@ -28,10 +28,10 @@ describe(`$${AddressValidator.name}`, () => {
     };
 
     // Act
-    validator!.validate(validAddress);
+    sut!.validate(validAddress);
 
     // Assert
-    expect(validator!.isValid()).toBe(true);
+    expect(sut!.isValid()).toBe(true);
   });
 
   it('should add an error if cep length is invalid', () => {
@@ -39,7 +39,7 @@ describe(`$${AddressValidator.name}`, () => {
     const invalidCep = '12345';  // Invalid CEP length
 
     // Act
-    validator!.validate({
+    sut!.validate({
       cep: invalidCep,
       city: 'City',
       neighborhood: 'Neighborhood',
@@ -50,8 +50,8 @@ describe(`$${AddressValidator.name}`, () => {
     });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Cep with invalid length! Should be eight')
     );
   });
@@ -69,11 +69,11 @@ describe(`$${AddressValidator.name}`, () => {
     };
 
     // Act
-    validator!.validate(invalidAddress);
+    sut!.validate(invalidAddress);
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('City name is required')
     );
   });
@@ -91,11 +91,11 @@ describe(`$${AddressValidator.name}`, () => {
     };
 
     // Act
-    validator!.validate(invalidAddress);
+    sut!.validate(invalidAddress);
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('City name too short!')
     );
   });
@@ -113,11 +113,11 @@ describe(`$${AddressValidator.name}`, () => {
     };
 
     // Act
-    validator!.validate(invalidAddress);
+    sut!.validate(invalidAddress);
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('City name too long!')
     );
   });
@@ -135,11 +135,11 @@ describe(`$${AddressValidator.name}`, () => {
     };
 
     // Act
-    validator!.validate(invalidAddress);
+    sut!.validate(invalidAddress);
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Neighborhood name is required')
     );
   });
@@ -157,11 +157,11 @@ describe(`$${AddressValidator.name}`, () => {
     };
 
     // Act
-    validator!.validate(invalidAddress);
+    sut!.validate(invalidAddress);
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Neighborhood name is required') // This message should be about street, not neighborhood
     );
   });
@@ -179,14 +179,14 @@ describe(`$${AddressValidator.name}`, () => {
     };
 
     // Act
-    validator!.validate(invalidCoordinates);
+    sut!.validate(invalidCoordinates);
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Latitude should be between -90deg and +90deg')
     );
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('Longitude should be between -180deg and +180deg')
     );
   });
@@ -196,7 +196,7 @@ describe(`$${AddressValidator.name}`, () => {
     const invalidState = 'InvalidState';
 
     // Act
-    validator!.validate({
+    sut!.validate({
       cep: '12345678',
       city: 'City',
       neighborhood: 'Neighborhood',
@@ -207,8 +207,8 @@ describe(`$${AddressValidator.name}`, () => {
     });
 
     // Assert
-    expect(validator!.isInvalid()).toBe(true);
-    expect(validator!.domainErrors).toContainEqual(
+    expect(sut!.isInvalid()).toBe(true);
+    expect(sut!.domainErrors).toContainEqual(
       new DomainError('State should not exists!')
     );
   });

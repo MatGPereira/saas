@@ -5,10 +5,10 @@ import { UniqueEntityId } from './unique-entity-id';
 describe(`#${UniqueEntityId.name}`, _ => {
 	it('should generate an object with an value key', _ => {
 		// Arrange | Act
-		const uniqueEntityId = new UniqueEntityId();
+		const sut = new UniqueEntityId();
 
 		// Assert
-		expect(uniqueEntityId).toEqual(
+		expect(sut).toEqual(
 			expect.objectContaining({ value: expect.any(String) })
 		);
 	});
@@ -18,8 +18,8 @@ describe(`#${UniqueEntityId.name}`, _ => {
 		const givenId = 'id-123';
 
 		// Act
-		const uniqueEntityId = new UniqueEntityId(givenId);
-		const uniqueEntityIdValue = uniqueEntityId.toString();
+		const sut = new UniqueEntityId(givenId);
+		const uniqueEntityIdValue = sut.toString();
 
 		// Assert
 		expect(uniqueEntityIdValue).toBe(givenId);
@@ -28,22 +28,22 @@ describe(`#${UniqueEntityId.name}`, _ => {
 	it('should generate a random uuid when it is not to pass any value', _ => {
 		// Arrange
 		const uuidv4Regex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-		
+
 		// Act
-		const uniqueEntityId = new UniqueEntityId();
+		const sut = new UniqueEntityId();
 
 		// Assert
-		const isValidGeneratedUuid = uuidv4Regex.test(uniqueEntityId.toString());
+		const isValidGeneratedUuid = uuidv4Regex.test(sut.toString());
 		expect(isValidGeneratedUuid).toBe(true);
 	});
 
 	it('should return the id value when use (@toString) method', _ => {
 		// Arrange
 		const generatedUuidLength = 36;
-		const uniqueEntityId = new UniqueEntityId();
+		const sut = new UniqueEntityId();
 
 		// Act
-		const uniqueEntityIdValue = uniqueEntityId.toString();
+		const uniqueEntityIdValue = sut.toString();
 
 		// Assert
 		expect(uniqueEntityIdValue).toBeTruthy();

@@ -13,10 +13,10 @@ describe(`#${User.name}`, _ => {
 
 	it('should be able to create an (#User) entity', _ => {
 		// Act
-		const user: User = User.create(validUserProps!);
+		const sut: User = User.create(validUserProps!);
 
 		// Assert
-		expect(user).toEqual(
+		expect(sut).toEqual(
 			expect.objectContaining({
 				_id: expect.objectContaining({
 					value: expect.any(String),

@@ -15,19 +15,19 @@ describe(`#${UserValidator.name}`, _ => {
 		'should throw an error for name (%s) with invalid value (%s)',
 		(invalidName: string, errorMessage: string) => {
 			// Arrange
-			const userValidator = new UserValidator();
+			const sut = new UserValidator();
 
 			// Act
-			userValidator!.validate({
+			sut!.validate({
 				name: invalidName,
 				lastName: faker.string.alpha({ length: { min: 3, max: 50 } }),
 				username: faker.string.alpha({ length: { min: 3, max: 16 } }),
 			});
 
 			// Assert
-			expect(userValidator!.isInvalid).toBeTruthy();
+			expect(sut!.isInvalid).toBeTruthy();
 
-			const errors: DomainError[] = userValidator!.domainErrors;
+			const errors: DomainError[] = sut!.domainErrors;
 			expect(errors[0].errorMessage).toEqual(errorMessage);
 		}
 	);
@@ -41,19 +41,19 @@ describe(`#${UserValidator.name}`, _ => {
 		'should throw an error for last name (%s) with invalid value (%s)',
 		(invalidLastName: string, errorMessage: string) => {
 			// Arrange
-			const userValidator = new UserValidator();
+			const sut = new UserValidator();
 
 			// Act
-			userValidator!.validate({
+			sut!.validate({
 				name: faker.string.alpha({ length: { min: 3, max: 50 } }),
 				lastName: invalidLastName,
 				username: faker.string.alpha({ length: { min: 3, max: 16 } }),
 			});
 
 			// Assert
-			expect(userValidator!.isInvalid).toBeTruthy();
+			expect(sut!.isInvalid).toBeTruthy();
 
-			const errors: DomainError[] = userValidator!.domainErrors;
+			const errors: DomainError[] = sut!.domainErrors;
 			expect(errors[0].errorMessage).toEqual(errorMessage);
 		}
 	);
@@ -66,19 +66,19 @@ describe(`#${UserValidator.name}`, _ => {
 		'should throw an error for username (%s) with invalid value (%s)',
 		(username: string, errorMessage: string) => {
 			// Arrange
-			const userValidator = new UserValidator();
+			const sut = new UserValidator();
 
 			// Act
-			userValidator!.validate({
+			sut!.validate({
 				name: faker.string.alpha({ length: { min: 3, max: 50 } }),
 				lastName: faker.string.alpha({ length: { min: 3, max: 16 } }),
 				username,
 			});
 
 			// Assert
-			expect(userValidator!.isInvalid).toBeTruthy();
+			expect(sut!.isInvalid).toBeTruthy();
 
-			const errors: DomainError[] = userValidator!.domainErrors;
+			const errors: DomainError[] = sut!.domainErrors;
 			expect(errors[0].errorMessage).toEqual(errorMessage);
 		}
 	);
