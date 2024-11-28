@@ -1,13 +1,16 @@
 import { Entity } from '@/common/domain/entities/entity';
 import { Password, Cpf, Telephone, Address, Email } from '../../value-objects';
 import { UserValidator } from './user-validator';
+import { UniqueEntityId } from '@/common/domain/entities/unique-entity-id';
 
 type TCreateUser = Omit<TUserProps, 'createdAt'>;
 type TUserProps = {
+	tenantId: UniqueEntityId;
 	name: string;
 	lastName: string;
 	email: Email;
 	password: Password;
+	salt: string;
 	username?: string;
 	cpf: Cpf;
 	telephones: Telephone[];
@@ -28,6 +31,8 @@ class User extends Entity<TUserProps> {
 
 		return new User(
 			{
+				tenantId: props.tenantId,
+				salt: props.salt,
 				name: props.name,
 				lastName: props.lastName,
 				email: props.email,

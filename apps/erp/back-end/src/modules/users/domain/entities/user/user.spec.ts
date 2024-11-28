@@ -1,3 +1,4 @@
+import { UniqueEntityId } from '@/common/domain/entities/unique-entity-id';
 import { describe, it, expect, beforeEach } from 'vitest';
 
 import { faker } from '@faker-js/faker';
@@ -38,6 +39,8 @@ describe(`#${User.name}`, _ => {
 		});
 
 		validUserProps = {
+			salt: faker.number.hex(),
+			tenantId: new UniqueEntityId('1'),
 			name: faker.string.alpha({ length: { min: 3, max: 50 } }),
 			lastName: faker.string.alpha({ length: { min: 3, max: 50 } }),
 			addresses: [address],
