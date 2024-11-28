@@ -10,7 +10,7 @@ abstract class Entity<T> {
 		this.props = props;
 	}
 
-	protected get id(): UniqueEntityId {
+	public get id(): UniqueEntityId {
 		return this._id;
 	}
 }

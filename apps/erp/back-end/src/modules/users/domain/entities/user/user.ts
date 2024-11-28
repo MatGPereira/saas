@@ -21,7 +21,7 @@ type TUserProps = {
 
 class User extends Entity<TUserProps> {
 
-	public static create(props: TCreateUser): User {
+	public static create(props: TCreateUser) {
 		const userValidator: UserValidator = new UserValidator();
 		userValidator.validate(props);
 
@@ -45,6 +45,12 @@ class User extends Entity<TUserProps> {
 			}
 		);
 	}
+
+	public get email(): Email {
+		return this.props.email;
+	}
+
+	private set email(value: string) { }
 }
 
 export { User };
