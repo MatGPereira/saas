@@ -4,13 +4,13 @@ import { faker } from '@faker-js/faker';
 
 import { Password, TPasswordCreate } from './password';
 
-describe.skip(`#${Password.name}`, _ => {
+describe(`#${Password.name}`, _ => {
   let validPasswordProps: TPasswordCreate | undefined = undefined;
 
   // Arrange
   beforeEach(_ => {
     validPasswordProps = {
-      password: 'Aa123!@aX',
+      password: '$2b$08$.338oUjStQvZxIHyDHLXs..9v29HcbOlmhk/GNxTGaJPiT2DqeXPm',
     };
   });
 
@@ -21,22 +21,22 @@ describe.skip(`#${Password.name}`, _ => {
     // Assert
     expect(sut).toEqual(
       expect.objectContaining({
-        _value: expect.any(String),
+        _value: validPasswordProps!.password,
       })
     );
   });
 
   it(
-    `should not be able to create an (#${Password.name})  value object when props is invalid`,
+    `should not be able to create an (#${Password.name}) value object when props are invalid`,
     _ => {
       // Arrange
-      const passwordPropsWithInvalidMinLength: TPasswordCreate = {
+      const passwordPropsWithEmptyHash: TPasswordCreate = {
         ...validPasswordProps!,
-        password: faker.internet.password({ length: 8 }),
+        password: '',
       };
-      const passwordPropsWithInvalidMaxLength: TPasswordCreate = {
+      const passwordPropsWithInvalidFormat: TPasswordCreate = {
         ...validPasswordProps!,
-        password: faker.internet.password({ length: 21 }),
+        password: faker.internet.password(),
       };
       const passwordPropsWithNullValue: TPasswordCreate = {
         ...validPasswordProps!,
@@ -46,14 +46,9 @@ describe.skip(`#${Password.name}`, _ => {
         ...validPasswordProps!,
         password: '   ',
       };
-      const passwordPropsWithInvalidFormat: TPasswordCreate = {
-        ...validPasswordProps!,
-        password: faker.string.alpha(),
-      };
 
       // Act | Assert
-      expect(() => Password.create(passwordPropsWithInvalidMinLength)).toThrow()
-      expect(() => Password.create(passwordPropsWithInvalidMaxLength)).toThrow();
+      expect(() => Password.create(passwordPropsWithEmptyHash)).toThrow();
       expect(() => Password.create(passwordPropsWithInvalidFormat)).toThrow();
       expect(() => Password.create(passwordPropsWithFalsyValue)).toThrow();
       expect(() => Password.create(passwordPropsWithNullValue)).toThrow();

@@ -3,30 +3,30 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { PasswordValidator } from './password-validator';
 import { DomainError } from '@/common/domain/errors/domain-error';
 
-describe.skip(`$${PasswordValidator.name}`, () => {
+describe(`$${PasswordValidator.name}`, () => {
   let sut: PasswordValidator | undefined = undefined;
 
   beforeEach(_ => {
     sut = new PasswordValidator();
   });
 
-  it('should not add errors for a valid password', () => {
+  it('should not add errors for a valid bcrypt hash', () => {
     // Arrange
-    const validPassword = 'Valid@123';
+    const validHash = '$2b$08$.338oUjStQvZxIHyDHLXs..9v29HcbOlmhk/GNxTGaJPiT2DqeXPm';
 
     // Act
-    sut!.validate({ password: validPassword });
+    sut!.validate({ password: validHash });
 
     // Assert
     expect(sut!.isValid()).toBe(true);
   });
 
-  it('should add an error if password is empty', () => {
+  it('should add an error if the hash is empty', () => {
     // Arrange
-    const emptyPassword = '';
+    const emptyHash = '';
 
     // Act
-    sut!.validate({ password: emptyPassword });
+    sut!.validate({ password: emptyHash });
 
     // Assert
     expect(sut!.isInvalid()).toBe(true);
@@ -35,87 +35,32 @@ describe.skip(`$${PasswordValidator.name}`, () => {
     );
   });
 
-  it('should add an error if password is too short', () => {
+  it('should add an error if the hash has an invalid format', () => {
     // Arrange
-    const shortPassword = 'S@1';
+    const invalidHash = 'InvalidHash123';
 
     // Act
-    sut!.validate({ password: shortPassword });
+    sut!.validate({ password: invalidHash });
 
     // Assert
     expect(sut!.isInvalid()).toBe(true);
     expect(sut!.domainErrors).toContainEqual(
-      new DomainError('Password is too short!')
+      new DomainError('Password hash has an invalid format!')
     );
   });
 
-  it('should add an error if password is too long', () => {
+  it('should validate multiple invalid cases for the hash', () => {
     // Arrange
-    const longPassword = 'A@1'.repeat(10);
+    const invalidHash = '';
 
     // Act
-    sut!.validate({ password: longPassword });
-
-    // Assert
-    expect(sut!.isInvalid()).toBe(true);
-    expect(sut!.domainErrors).toContainEqual(
-      new DomainError('Password is too long!')
-    );
-  });
-
-  it('should add an error if password has an invalid format', () => {
-    // Arrange
-    const invalidPassword = 'password123';
-
-    // Act
-    sut!.validate({ password: invalidPassword });
-
-    // Assert
-    expect(sut!.isInvalid()).toBe(true);
-    expect(sut!.domainErrors).toContainEqual(
-      new DomainError('Password has invalid format')
-    );
-  });
-
-  it('should add multiple errors if password violates multiple rules', () => {
-    // Arrange
-    const invalidPassword = '';
-
-    // Act
-    sut!.validate({ password: invalidPassword });
+    sut!.validate({ password: invalidHash });
 
     // Assert
     expect(sut!.isInvalid()).toBe(true);
     expect(sut!.domainErrors).toEqual([
       new DomainError('Password is required!'),
-      new DomainError('Password is too short!'),
-      new DomainError('Password has invalid format'),
-    ]);
-  });
-
-  it('should validate a valid password correctly', () => {
-    // Arrange
-    const validPassword = 'Secure@123';
-
-    // Act
-    sut!.validate({ password: validPassword });
-
-    // Assert
-    expect(sut!.isValid()).toBe(true);
-  });
-
-  it('should validate an invalid password and accumulate errors', () => {
-    // Arrange
-    const invalidPassword = 'abc';
-
-    // Act
-    sut!.validate({ password: invalidPassword });
-
-    // Assert
-    expect(sut!.isInvalid()).toBe(true);
-    expect(sut!.domainErrors).toEqual([
-      new DomainError('Password is too short!'),
-      new DomainError('Password has invalid format'),
+      new DomainError('Password hash has an invalid format!'),
     ]);
   });
 });

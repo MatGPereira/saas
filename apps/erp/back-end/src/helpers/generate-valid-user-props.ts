@@ -11,7 +11,7 @@ import { UniqueEntityId } from "@/common/domain/entities/unique-entity-id";
 function generateValidUserProps(): TCreateUser {
   const email: Email = Email.create({ email: faker.internet.email() })
   const password: Password = Password.create({
-    password: 'Aa123!@aX'
+    password: '$2b$08$.338oUjStQvZxIHyDHLXs..9v29HcbOlmhk/GNxTGaJPiT2DqeXPm'
   });
   const cpf: Cpf = Cpf.create({ cpf: generator.generateCpf() });
   const telephone: Telephone = Telephone.create({

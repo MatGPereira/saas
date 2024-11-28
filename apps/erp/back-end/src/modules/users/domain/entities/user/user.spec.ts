@@ -31,9 +31,33 @@ describe(`#${User.name}`, _ => {
 						_value: expect.any(String)
 					}),
 					username: expect.any(String),
-					cpf: expect.objectContaining({}),
-					telephones: expect.objectContaining({}),
-					addresses: expect.objectContaining({}),
+					cpf: expect.objectContaining({
+						_value: expect.any(String)
+					}),
+					telephones: expect.objectContaining([
+						expect.objectContaining({
+							_value: expect.objectContaining({
+								ddd: expect.any(Number),
+								number: expect.any(String),
+							})
+						})
+					]),
+					addresses: expect.arrayContaining([
+						expect.objectContaining({
+							_value: expect.objectContaining({
+								cep: expect.any(String),
+								city: expect.any(String),
+								state: expect.any(String),
+								neighborhood: expect.any(String),
+								street: expect.any(String),
+								number: expect.any(String),
+								coordinates: expect.objectContaining({
+									latitude: expect.any(Number),
+									longitude: expect.any(Number)
+								}),
+							}),
+						}),
+					]),
 					createdAt: expect.any(Date),
 				})
 			})

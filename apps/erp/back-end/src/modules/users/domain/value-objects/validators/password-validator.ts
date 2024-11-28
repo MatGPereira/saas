@@ -1,43 +1,26 @@
 import type { TPasswordCreate } from "../password";
 import { AbstractValidator } from "@/common/domain/validators/abstract-validator";
 import { DomainError } from "@/common/domain/errors/domain-error";
-import { EPasswordValidatorConstants } from "./password-validator-constants";
 
 class PasswordValidator extends AbstractValidator<TPasswordCreate> {
 
-  private static readonly validPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{9,20}$/;
+  private static readonly validBcryptHashRegex = /^\$2[abxy]\$\d{2}\$[./A-Za-z0-9]{53}$/;
 
   public override validate({ password }: TPasswordCreate): void {
-    // this.validatePassword(password);
+    this.validateEncryptedPassword(password);
   }
 
-  private validatePassword(password: string): void {
+  private validateEncryptedPassword(password: string): void {
     if (!password) {
       this.addDomainError(
         new DomainError('Password is required!')
       );
     }
 
-    const passwordHasInvalidMinLength: boolean = password.length
-      < EPasswordValidatorConstants.PASSWORD_MIN_LENGTH;
-    if (passwordHasInvalidMinLength) {
-      this.addDomainError(
-        new DomainError('Password is too short!')
-      );
-    }
-
-    const passwordHasInvalidMaxLength: boolean = password.length
-      > EPasswordValidatorConstants.PASSWORD_MAX_LENGTH;
-    if (passwordHasInvalidMaxLength) {
-      this.addDomainError(
-        new DomainError('Password is too long!')
-      );
-    }
-
-    const passwordHasInvalidFormat: boolean = !PasswordValidator.validPasswordRegex.test(password);
+    const passwordHasInvalidFormat: boolean = !PasswordValidator.validBcryptHashRegex.test(password);
     if (passwordHasInvalidFormat) {
       this.addDomainError(
-        new DomainError('Password has invalid format')
+        new DomainError('Password hash has an invalid format!')
       );
     }
   }
