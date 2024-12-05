@@ -1,4 +1,4 @@
-import type { ICryptoService } from "../../services/abstractions/crypto-service";
+import type { ICryptoService } from "../../../../../common/application/services/abstractions/crypto-service";
 import type { IRegisterUserUseCase } from "./use-case-abstraction";
 import type { IAddressCommand, IRegisterUserUseCaseCommand, ITelephoneCommand } from "./use-case-command";
 import type { IRegisterUserUseCaseResult } from "./use-case-result";

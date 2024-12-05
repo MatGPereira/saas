@@ -16,7 +16,7 @@ class CryptoService implements ICryptoService {
     return [passwordHash, salt];
   }
 
-  public async compare(value: string, hashedValue: string, salt?: string): Promise<boolean> {
+  public async compare(value: string, hashedValue: string): Promise<boolean> {
     return compare(value, hashedValue);
   }
 

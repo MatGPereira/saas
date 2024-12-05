@@ -2,12 +2,12 @@ import { describe, it, beforeEach, expect } from 'vitest';
 
 import type { IAuthenticateUserWithEmailAndPassword } from './use-case-abstraction';
 import type { IAuthenticateUserWithEmailAndPasswordCommand } from './use-case-command';
-import type { ICryptoService } from '../../services/abstractions/crypto-service';
+import type { ICryptoService } from '../../../../../common/application/services/abstractions/crypto-service';
 import type { TCreateUser } from '@/modules/users/domain/entities/user/user';
 
 import { InMemoryUserRepository } from '@/modules/users/infrastructure/repositories/in-memory/user-repository';
 import { AuthenticateUserWithEmailAndPasswordUseCase } from './use-case';
-import { CryptoService } from '../../services/crypto-service';
+import { CryptoService } from '../../../../../common/application/services/crypto-service';
 import { User } from '@/modules/users/domain/entities/user/user';
 import { generateValidUserProps } from '@/helpers/generate-valid-user-props';
 import { Password } from '@/modules/users/domain/value-objects';

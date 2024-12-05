@@ -2,7 +2,7 @@ import type { IReadOnlyUserRepository } from "@/modules/users/domain/abstraction
 import type { IAuthenticateUserWithEmailAndPassword } from "./use-case-abstraction";
 import type { IAuthenticateUserWithEmailAndPasswordCommand } from "./use-case-command";
 import type { IAuthenticateUserWithEmailAndPasswordResult } from "./use-case-result";
-import type { ICryptoService } from "../../services/abstractions/crypto-service";
+import type { ICryptoService } from "../../../../../common/application/services/abstractions/crypto-service";
 
 import { User } from "@/modules/users/domain/entities/user/user";
 

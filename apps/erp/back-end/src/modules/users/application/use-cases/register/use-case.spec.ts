@@ -7,7 +7,7 @@ import type { IAddressCommand, IRegisterUserUseCaseCommand, ITelephoneCommand } 
 import type { TCreateUser } from '@/modules/users/domain/entities/user/user';
 
 import { RegisterUserUseCase } from './use-case';
-import { CryptoService } from '../../services/crypto-service';
+import { CryptoService } from '../../../../../common/application/services/crypto-service';
 import { InMemoryUserRepository } from '@/modules/users/infrastructure/repositories/in-memory/user-repository';
 import { EBrazilStates } from '@/modules/users/domain/enums/brazil-states';
 import { generateValidDdds } from '@/helpers/generate-valid-ddds';
