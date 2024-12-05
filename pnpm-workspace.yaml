@@ -1,5 +1,6 @@
 packages:
   - "apps/erp/back-end"
   - "apps/erp/front-end"
+  - "apps/erp/queue"
   - "packages/*"
   # - "docs/*"
