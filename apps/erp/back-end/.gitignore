@@ -63,9 +63,11 @@ web_modules/
 
 # dotenv environment variable files
 .env
-.env.development
-.env.test
-.env.production
+.env.local
+.env.staging
+
+# Cryptography keys
+*.pem
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
