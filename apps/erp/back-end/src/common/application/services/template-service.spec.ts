@@ -17,7 +17,9 @@ describe(`#${TemplateService.name}`, _ => {
     const templateName: ETemplateReference = ETemplateReference.ForgotPasswordTemplateName;
 
     // Action
-    const template: string = await templateService!.get(templateName);
+    const template: string = await templateService!.get({
+      templateName
+    });
 
     // Assert
     expect(template).toBeDefined();
@@ -30,6 +32,6 @@ describe(`#${TemplateService.name}`, _ => {
       = <ETemplateReference>'invalid-template-name';
 
     // Action | Assert
-    await expect(() => templateService!.get(templateName)).rejects.toThrow();
+    await expect(() => templateService!.get({ templateName })).rejects.toThrow();
   });
 });

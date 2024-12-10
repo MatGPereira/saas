@@ -1,17 +1,27 @@
 import { ETemplateReference } from "../../templates/template-reference";
 
-interface IEmailContent {
-  title: string;
-  content: string;
-  action: string;
+interface ITo {
+  name: string;
+  email: string;
 }
 
-interface IEmailTemplate {
-  templateName: ETemplateReference
+interface IFrom {
+  name: string;
+  email: string;
+}
+
+interface ISubject {
+  template: string;
+}
+
+interface IEmail {
+  to: ITo;
+  from: IFrom;
+  subject: ISubject;
 }
 
 interface IEmailService {
-  send(emailContent: IEmailContent, emailTemplate: IEmailTemplate): Promise<void>;
+  send(emailContent: IEmail): Promise<void>;
 }
 
-export type { IEmailService, IEmailContent, IEmailTemplate };
+export type { IEmailService, IEmail, ITo, IFrom, ISubject };

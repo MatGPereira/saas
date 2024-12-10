@@ -2,6 +2,7 @@ import type { IReadOnlyUserRepository } from "@/modules/users/domain/abstraction
 import type { IForgotPassword } from "./use-case-abstraction";
 import type { IForgotPasswordCommand } from "./use-case-command";
 import type { IEmailService } from "../../../../../common/application/services/abstractions/email-service";
+import type { ITemplateService } from "@/common/application/services/abstractions/template-service";
 
 import { ETemplateReference } from "@/common/application/templates/template-reference";
 
@@ -9,7 +10,8 @@ class ForgotPasswordUseCase implements IForgotPassword {
 
   public constructor(
     private readonly readonlyUserRepository: IReadOnlyUserRepository,
-    private readonly emailService: IEmailService
+    private readonly emailService: IEmailService,
+    private readonly templateService: ITemplateService
   ) { }
 
   public async execute({ email }: IForgotPasswordCommand): Promise<void> {
@@ -18,22 +20,25 @@ class ForgotPasswordUseCase implements IForgotPassword {
     );
     if (!existingUserWithEmail) return;
 
-    // TODO: think a better way to put messages
-    const title: string = '';
-    const content: string = '';
-    const action: string = '';
+    // TODO: add internationalization
+    const template: string = await this.templateService.get({
+      templateName: ETemplateReference.ForgotPasswordTemplateName,
+    });
 
-    // TODO: put e-mail to a queue to send email async
-    await this.emailService.send(
-      {
-        action,
-        content,
-        title
+    // TODO: insert the e-mail function to a queue
+    await this.emailService.send({
+      to: {
+        name: '',
+        email: '',
       },
-      {
-        templateName: ETemplateReference.ForgotPasswordTemplateName
-      }
-    );
+      from: {
+        name: '',
+        email: '',
+      },
+      subject: {
+        template,
+      },
+    });
   }
 }
 

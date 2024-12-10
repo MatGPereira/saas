@@ -1,7 +1,12 @@
 import { ETemplateReference } from "../../templates/template-reference";
 
-interface ITemplateService {
-  get(templateName: ETemplateReference): Promise<string>;
+interface ITemplateInfos {
+  templateName: ETemplateReference;
+  internationalization?: 'pt-BR' | 'en' | 'es';
 }
 
-export type { ITemplateService };
+interface ITemplateService {
+  get(templateInfos: ITemplateInfos): Promise<string>;
+}
+
+export type { ITemplateService, ITemplateInfos };
