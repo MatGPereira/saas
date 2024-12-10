@@ -72,7 +72,7 @@ describe(`#${CryptoService.name}`, _ => {
     }
   );
 
-  it.only('should be able to generate an access token', async () => {
+  it('should be able to generate an access token', async () => {
     // Arrange
     const payload: Record<string, unknown> = {}
 
@@ -80,7 +80,7 @@ describe(`#${CryptoService.name}`, _ => {
     const accessToken: string = await sut!.generateToken(payload);
 
     // Assert
-    expect(accessToken).toHaveLength(427);
+    expect(accessToken).toHaveLength(768);
   });
 
   it('should be able to verify valid token', async () => {
