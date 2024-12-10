@@ -7,17 +7,18 @@
     "build": "run-s build:tsup build:obfuscate",
     "build:tsup": "tsup src --out-dir build --minify",
     "build:obfuscate": "javascript-obfuscator build --output build/ --config obfuscator-config.json",
-    "tests:unit": "vitest run --dir ./src/",
-    "tests:unit:watch": "vitest",
-    "tests:unit:ui": "vitest --ui",
+    "tests:unit": "node --env-file=.env.local node_modules/vitest/vitest.mjs run --dir ./src/",
+    "tests:unit:watch": "node --env-file=.env.local node_modules/vitest/vitest.mjs",
+    "tests:unit:ui": "node --env-file=.env.local node_modules/vitest/vitest.mjs --ui",
     "tests:unit:coverage": "run-p tests:unit:coverage:v8 tests:unit:reporter",
-    "tests:unit:reporter": "vitest run --dir ./src/ --reporter=html --output-file=./coverage/last-reporter/index.html",
-    "tests:unit:coverage:v8": "vitest run --coverage",
-    "bench:unit": "vitest bench"
+    "tests:unit:reporter": "node --env-file=.env.local node_modules/vitest/vitest.mjs run --dir ./src/ --reporter=html --output-file=./coverage/last-reporter/index.html",
+    "tests:unit:coverage:v8": "node --env-file=.env.local node_modules/vitest/vitest.mjs run --coverage",
+    "bench:unit": "node --env-file=.env.local node_modules/vitest/vitest.mjs bench"
   },
   "dependencies": {
     "bcrypt": "5.1.1",
-    "jsonwebtoken": "9.0.2"
+    "jsonwebtoken": "9.0.2",
+    "zod": "3.24.0"
   },
   "devDependencies": {
     "@faker-js/faker": "9.2.0",

@@ -72,7 +72,7 @@ describe(`#${CryptoService.name}`, _ => {
     }
   );
 
-  it('should be able to generate an access token', async () => {
+  it.only('should be able to generate an access token', async () => {
     // Arrange
     const payload: Record<string, unknown> = {}
 

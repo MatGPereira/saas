@@ -1,11 +1,11 @@
-import { readFile } from 'node:fs/promises';
-
 import type { JwtPayload } from 'jsonwebtoken';
-
-import { genSalt, hash, compare } from 'bcrypt';
 import { sign, verify } from 'jsonwebtoken';
 
+import { genSalt, hash, compare } from 'bcrypt';
+
 import type { ICryptoService } from "./abstractions/crypto-service";
+
+import { env } from '@/common/env';
 
 class CryptoService implements ICryptoService {
 
@@ -21,7 +21,7 @@ class CryptoService implements ICryptoService {
   }
 
   public async generateToken(payload: Record<string, unknown>): Promise<string> {
-    const privateTokenKey: Buffer = await readFile('./private_key.pem');
+    const privateTokenKey: string = env.PRIVATE_RSA_KEY;
     return sign(
       payload,
       privateTokenKey,
@@ -33,7 +33,7 @@ class CryptoService implements ICryptoService {
   }
 
   public async verifyToken(token: string): Promise<string | JwtPayload> {
-    const publicTokenKey: Buffer = await readFile('./public_key.pem');
+    const publicTokenKey: string = env.PUBLIC_RSA_KEY;
     return verify(
       token,
       publicTokenKey
