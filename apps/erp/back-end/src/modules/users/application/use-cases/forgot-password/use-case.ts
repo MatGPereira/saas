@@ -1,10 +1,11 @@
 import type { IReadOnlyUserRepository } from "@/modules/users/domain/abstractions/repositories/in-memory/user-repository";
 import type { IForgotPassword } from "./use-case-abstraction";
 import type { IForgotPasswordCommand } from "./use-case-command";
-import type { IEmailService } from "../../../../../common/application/services/abstractions/email-service";
 import type { ITemplateService } from "@/common/application/services/abstractions/template-service";
+import type { IEmailService } from "@/common/infrastructure/services/abstraction/email-service";
 
 import { ETemplateReference } from "@/common/application/templates/template-reference";
+import { User } from "@/modules/users/domain/entities/user/user";
 
 class ForgotPasswordUseCase implements IForgotPassword {
 
@@ -15,7 +16,7 @@ class ForgotPasswordUseCase implements IForgotPassword {
   ) { }
 
   public async execute({ email }: IForgotPasswordCommand): Promise<void> {
-    const existingUserWithEmail: boolean = await this.readonlyUserRepository.existUserByEmail(
+    const existingUserWithEmail: User | null = await this.readonlyUserRepository.findUserByEmail(
       email
     );
     if (!existingUserWithEmail) return;
@@ -28,16 +29,17 @@ class ForgotPasswordUseCase implements IForgotPassword {
     // TODO: insert the e-mail function to a queue
     await this.emailService.send({
       to: {
-        name: '',
-        email: '',
+        name: existingUserWithEmail.name,
+        email,
       },
       from: {
-        name: '',
-        email: '',
+        name: 'no-reply',
+        email: 'matheusgp.mto@outlook.com',
       },
-      subject: {
+      subject: 'Email test',
+      body: {
         template,
-      },
+      }
     });
   }
 }

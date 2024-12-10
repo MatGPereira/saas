@@ -1,5 +1,3 @@
-import { ETemplateReference } from "../../templates/template-reference";
-
 interface ITo {
   name: string;
   email: string;
@@ -17,7 +15,8 @@ interface ISubject {
 interface IEmail {
   to: ITo;
   from: IFrom;
-  subject: ISubject;
+  subject: string;
+  body: ISubject;
 }
 
 interface IEmailService {
