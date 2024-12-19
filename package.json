@@ -7,7 +7,7 @@
 		"tests:unit": "turbo tests:unit"
 	},
 	"dependencies": {
-		"turbo": "^2.2.3"
+		"turbo": "2.2.3"
 	},
 	"engines": {
 		"node": ">=18"
