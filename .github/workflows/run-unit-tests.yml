@@ -31,13 +31,13 @@ jobs:
 
       - name: Set up .env.local
         run: |
-          echo "NODE_ENV=local" >> .env.local
-          echo "PRIVATE_RSA_KEY=mock_private_key" >> .env.local
-          echo "PUBLIC_RSA_KEY=mock_public_key" >> .env.local
-          echo "EMAIL_USERNAME=test@example.com" >> .env.local
-          echo "EMAIL_PASSWORD=password" >> .env.local
-          echo "EMAIL_HOST=smtp.example.com" >> .env.local
-          echo "EMAIL_PORT=25" >> .env.local
+          echo "NODE_ENV=local" >> ./apps/back-end/.env.local
+          echo "PRIVATE_RSA_KEY=mock_private_key" >> ./apps/back-end/.env.local
+          echo "PUBLIC_RSA_KEY=mock_public_key" >> ./apps/back-end/.env.local
+          echo "EMAIL_USERNAME=test@example.com" >> ./apps/back-end/.env.local
+          echo "EMAIL_PASSWORD=password" >> ./apps/back-end/.env.local
+          echo "EMAIL_HOST=smtp.example.com" >> ./apps/back-end/.env.local
+          echo "EMAIL_PORT=25" >> ./apps/back-end/.env.local
 
       - name: Execute unit tests
         run: pnpm tests:unit
