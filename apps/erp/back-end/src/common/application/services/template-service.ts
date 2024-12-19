@@ -2,8 +2,6 @@ import { readFile } from 'node:fs/promises';
 
 import type { ITemplateInfos, ITemplateService } from "./abstractions/template-service";
 
-import { ETemplateReference } from "../templates/template-reference";
-
 class TemplateService implements ITemplateService {
 
   private readonly templatesPath: string = './src/common/application/templates';
