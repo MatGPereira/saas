@@ -29,13 +29,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Set up .env.local
+        run: |
+          echo "NODE_ENV=local" >> .env.local
+          echo "PRIVATE_RSA_KEY=mock_private_key" >> .env.local
+          echo "PUBLIC_RSA_KEY=mock_public_key" >> .env.local
+          echo "EMAIL_USERNAME=test@example.com" >> .env.local
+          echo "EMAIL_PASSWORD=password" >> .env.local
+          echo "EMAIL_HOST=smtp.example.com" >> .env.local
+          echo "EMAIL_PORT=25" >> .env.local
+
       - name: Execute unit tests
-        env:
-          NODE_ENV: local
-          PRIVATE_RSA_KEY: mock_private_key
-          PUBLIC_RSA_KEY: mock_public_key
-          EMAIL_USERNAME: test@example.com
-          EMAIL_PASSWORD: password
-          EMAIL_HOST: smtp.example.com
-          EMAIL_PORT: '25'
         run: pnpm tests:unit
