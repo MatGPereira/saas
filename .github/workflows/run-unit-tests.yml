@@ -29,11 +29,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Generate RSA512 keys
+        run: |
+          openssl genpkey -algorithm RSA -out ./apps/erp/back-end/private_key.pem -pkeyopt rsa_keygen_bits:512
+          openssl rsa -pubout -in ./apps/erp/back-end/private_key.pem -out ./apps/erp/back-end/public_key.pem
+
       - name: Set up .env.local
         run: |
           echo "NODE_ENV=local" >> ./apps/erp/back-end/.env.local
-          echo "PRIVATE_RSA_KEY=mock_private_key" >> ./apps/erp/back-end/.env.local
-          echo "PUBLIC_RSA_KEY=mock_public_key" >> ./apps/erp/back-end/.env.local
+          echo "PRIVATE_RSA_KEY=$(cat ./apps/erp/back-end/private_key.pem)" >> ./apps/erp/back-end/.env.local
+          echo "PUBLIC_RSA_KEY=$(cat ./apps/erp/back-end/public_key.pem)" >> ./apps/erp/back-end/.env.local
           echo "EMAIL_USERNAME=test@example.com" >> ./apps/erp/back-end/.env.local
           echo "EMAIL_PASSWORD=password" >> ./apps/erp/back-end/.env.local
           echo "EMAIL_HOST=smtp.example.com" >> ./apps/erp/back-end/.env.local
