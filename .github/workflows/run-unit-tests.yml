@@ -30,4 +30,12 @@ jobs:
         run: pnpm install
 
       - name: Execute unit tests
+        env:
+          NODE_ENV: local
+          PRIVATE_RSA_KEY: mock_private_key
+          PUBLIC_RSA_KEY: mock_public_key
+          EMAIL_USERNAME: test@example.com
+          EMAIL_PASSWORD: password
+          EMAIL_HOST: smtp.example.com
+          EMAIL_PORT: '25'
         run: pnpm tests:unit
